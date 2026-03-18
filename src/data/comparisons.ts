@@ -102,6 +102,7 @@ export const comparisons: Comparison[] = [
     category: "Database",
     summary: "Airtable is a powerful spreadsheet-database hybrid, while Notion offers database features within a broader workspace context.",
     verdict: "Choose Airtable for serious data management. Choose Notion if you need databases alongside docs and project management.",
+    updatedAt: "January 2026",
     criteria: [
       { label: "Data Modeling", toolA: "Excellent", toolB: "Good" },
       { label: "Documentation", toolA: "None", toolB: "Excellent" },
