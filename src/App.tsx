@@ -8,6 +8,7 @@ import ComparePicker from "./pages/ComparePicker";
 import ComparePage from "./pages/ComparePage";
 import ToolsDirectory from "./pages/ToolsDirectory";
 import ToolDetail from "./pages/ToolDetail";
+import Admin from "./pages/Admin";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
