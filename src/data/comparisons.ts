@@ -5,6 +5,7 @@ export interface Comparison {
   category: string;
   summary: string;
   verdict: string;
+  updatedAt: string;
   criteria: { label: string; toolA: string; toolB: string }[];
 }
 
