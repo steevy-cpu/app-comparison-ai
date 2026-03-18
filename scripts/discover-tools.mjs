@@ -377,7 +377,7 @@ async function main() {
         continue;
       }
 
-      const compPrompt = buildComparisonPrompt(newTool, relevant[0], relevant[1]);
+      const compPrompt = buildComparisonPrompt(newTool, relevant);
       const compResponse = await callClaude(compPrompt, 2048);
 
       let parsedComps;
