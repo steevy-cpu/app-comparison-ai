@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import SEO from "@/components/SEO";
 import { comparisons, getComparisonBySlug } from "@/data/comparisons";
 import { getToolBySlug } from "@/data/tools";
 import NotFound from "./NotFound";
