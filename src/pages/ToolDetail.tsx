@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ExternalLink, Star, Check } from "lucide-react";
 import { getToolUrl } from "@/lib/affiliate";
+import { useAffiliateUrl } from "@/hooks/useAffiliateUrl";
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import { tools, getToolBySlug } from "@/data/tools";
