@@ -11,12 +11,40 @@ if (!ANTHROPIC_API_KEY) {
   process.exit(1);
 }
 
-function stripJsonFences(text) {
-  return text
+function robustJsonParse(text) {
+  // Step 1: Strip markdown fences
+  let cleaned = text
     .replace(/^```json\s*/i, '')
     .replace(/^```\s*/i, '')
     .replace(/```\s*$/i, '')
-    .trim();
+    .trim()
+
+  // Step 2: Try standard parse first
+  try {
+    return JSON.parse(cleaned)
+  } catch (e) {
+    // Step 3: Try to extract JSON object/array with regex
+    const objMatch = cleaned.match(/\{[\s\S]*\}/)
+    const arrMatch = cleaned.match(/\[[\s\S]*\]/)
+    const match = objMatch || arrMatch
+    if (match) {
+      try {
+        return JSON.parse(match[0])
+      } catch (e2) {
+        // Step 4: Fix common HTML escape issues
+        const fixed = match[0]
+          .replace(/\n/g, '\\n')
+          .replace(/\r/g, '\\r')
+          .replace(/\t/g, '\\t')
+        try {
+          return JSON.parse(fixed)
+        } catch (e3) {
+          throw new Error(`Could not parse JSON after all attempts: ${e3.message}`)
+        }
+      }
+    }
+    throw new Error(`No JSON object found in response: ${e.message}`)
+  }
 }
 
 // ---------------------------------------------------------------------------
