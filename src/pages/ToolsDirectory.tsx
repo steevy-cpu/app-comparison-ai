@@ -37,19 +37,24 @@ const ToolsDirectory = () => {
         {/* List */}
         <div className="mt-8 divide-y">
           {filtered.map((tool) => (
-            <Link
+            <div
               key={tool.slug}
-              to={`/tools/${tool.slug}`}
               className="flex flex-col sm:flex-row sm:items-center justify-between py-4 gap-2 group"
             >
-              <div>
+              <Link to={`/tools/${tool.slug}`} className="flex-1 min-w-0">
                 <span className="font-semibold text-foreground group-hover:text-accent transition-colors duration-150">
                   {tool.name}
                 </span>
                 <span className="text-xs border rounded px-2 py-0.5 text-body-muted ml-3">{tool.category}</span>
-              </div>
-              <p className="text-sm text-body-muted truncate max-w-md">{tool.description}</p>
-            </Link>
+                <p className="text-sm text-body-muted truncate max-w-md mt-1 sm:mt-0">{tool.description}</p>
+              </Link>
+              <Link
+                to="/compare"
+                className="text-xs text-accent hover:underline shrink-0"
+              >
+                Compare
+              </Link>
+            </div>
           ))}
         </div>
       </div>

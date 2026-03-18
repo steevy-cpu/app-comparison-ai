@@ -95,7 +95,7 @@ const ComparePage = () => {
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link to="/">Compare</Link>
+                  <Link to="/compare">Compare</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />

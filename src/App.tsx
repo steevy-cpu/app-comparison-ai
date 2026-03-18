@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import ComparePage from "./pages/ComparePage";
 import ToolsDirectory from "./pages/ToolsDirectory";
 import ToolDetail from "./pages/ToolDetail";
+import ComparePicker from "./pages/ComparePicker";
 import Blog from "./pages/Blog";
 import NotFound from "./pages/NotFound";
 
@@ -20,6 +21,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/compare" element={<ComparePicker />} />
           <Route path="/compare/:slug" element={<ComparePage />} />
           <Route path="/tools" element={<ToolsDirectory />} />
           <Route path="/tools/:slug" element={<ToolDetail />} />
