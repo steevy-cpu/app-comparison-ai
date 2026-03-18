@@ -83,6 +83,11 @@ const ComparePage = () => {
 
   return (
     <Layout>
+      <SEO
+        title={`${toolA.name} vs ${toolB.name}`}
+        description={`${toolA.name} vs ${toolB.name}: detailed comparison of features, pricing, pros and cons. Find out which tool is right for your team.`}
+        canonical={`/compare/${comparison.slug}`}
+      />
       {/* 1. Breadcrumb */}
       <div className="border-b border-border">
         <div className="container py-3">

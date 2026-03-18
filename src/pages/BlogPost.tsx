@@ -32,6 +32,11 @@ const BlogPost = () => {
 
   return (
     <Layout>
+      <SEO
+        title={post.title}
+        description={post.excerpt}
+        canonical={`/blog/${post.slug}`}
+      />
       {/* Breadcrumb */}
       <div className="border-b border-border">
         <div className="container py-3">

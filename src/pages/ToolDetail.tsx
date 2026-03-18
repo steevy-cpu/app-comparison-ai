@@ -1,7 +1,8 @@
 import { useParams, Link } from "react-router-dom";
 import { ExternalLink, Star } from "lucide-react";
 import Layout from "@/components/Layout";
-import { getToolBySlug } from "@/data/tools";
+import SEO from "@/components/SEO";
+import { tools, getToolBySlug } from "@/data/tools";
 import { comparisons } from "@/data/comparisons";
 import NotFound from "./NotFound";
 
@@ -15,8 +16,15 @@ const ToolDetail = () => {
     (c) => c.toolA === tool.slug || c.toolB === tool.slug
   );
 
+  const otherTools = tools.filter((t) => t.slug !== tool.slug).slice(0, 6);
+
   return (
     <Layout>
+      <SEO
+        title={`${tool.name} Review`}
+        description={`${tool.name} review: features, pricing, pros and cons. ${tool.description}`}
+        canonical={`/tools/${tool.slug}`}
+      />
       <div className="container py-16 max-w-3xl">
         <Link to="/tools" className="text-sm text-accent hover:underline">← All tools</Link>
 
@@ -93,6 +101,22 @@ const ToolDetail = () => {
             </div>
           </div>
         )}
+
+        {/* Compare CTAs */}
+        <div className="mt-10 border-t pt-8">
+          <h2 className="text-lg font-bold text-foreground">Compare {tool.name} With Another Tool</h2>
+          <div className="mt-4 flex flex-wrap gap-2 overflow-x-auto">
+            {otherTools.map((other) => (
+              <Link
+                key={other.slug}
+                to={`/compare?toolA=${tool.slug}`}
+                className="text-xs border border-border rounded-lg px-3 py-1.5 text-body hover:border-accent hover:text-accent transition-colors"
+              >
+                {tool.name} vs {other.name}
+              </Link>
+            ))}
+          </div>
+        </div>
       </div>
     </Layout>
   );
