@@ -286,13 +286,14 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
 
 function ToolHeaderBlock({ tool }: { tool: ReturnType<typeof getToolBySlug> }) {
   if (!tool) return null;
+  const affiliateUrl = useAffiliateUrl(tool.slug, getToolUrl(tool));
   return (
     <div>
       <h1 className="text-2xl font-bold text-foreground">{tool.name}</h1>
       <Badge variant="outline" className="mt-2 text-xs">{tool.category}</Badge>
       <p className="mt-3 text-sm text-body leading-relaxed">{tool.description}</p>
       <a
-        href={getToolUrl(tool)}
+        href={affiliateUrl}
         target="_blank"
         rel="noopener noreferrer"
         className="mt-3 inline-flex items-center gap-1 text-xs text-accent hover:underline"
