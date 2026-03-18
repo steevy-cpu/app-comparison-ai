@@ -76,33 +76,40 @@ async function callClaude(prompt, maxTokens = 2048) {
 // ---------------------------------------------------------------------------
 // 3. Discover new tools
 // ---------------------------------------------------------------------------
-function buildToolDiscoveryPrompt(existingNames) {
-  return `You are a SaaS research analyst for AppRival, a SaaS comparison website.
+function buildToolDiscoveryPrompt(existingToolNames) {
+  return `You are a SaaS and AI tools research analyst for AppRival, a tool comparison website covering both traditional SaaS products and AI tools.
 
-These tools are already in our database:
-${existingNames.map(n => `- ${n}`).join('\n')}
+These tools are already in our database — do NOT suggest any of these:
+${existingToolNames.join(', ')}
 
-Suggest exactly 3 new SaaS productivity tools we should add. Choose tools that:
-- Are actively used and well-known in 2026
-- Are NOT already in our list above
-- Fit these categories: Project Management, CRM, Communication, Productivity, or Collaboration
-- Have clear competitors already in our database (so we can create comparison pages)
+Suggest exactly 3 new tools to add to our database. Alternate between SaaS and AI tools — do not suggest 3 tools from the same category. Choose from these categories:
 
-Return a JSON array with exactly 3 objects, each with:
-{
-  "slug": "url-friendly-slug",
-  "name": "Tool Name",
-  "category": "one of the categories above",
-  "description": "2-3 sentence description of what the tool does",
-  "website": "domain.com without https://",
-  "pricing": "honest pricing description e.g. Free plan available. Paid from $X/user/month",
-  "rating": a number between 4.0 and 4.9,
-  "features": ["feature 1", "feature 2", "feature 3", "feature 4", "feature 5", "feature 6"],
-  "pros": ["pro 1", "pro 2", "pro 3"],
-  "cons": ["con 1", "con 2"],
-  "bestFor": "1-2 sentence description of ideal user"
-}
-Return only valid JSON array. No markdown, no explanation.`;
+SaaS categories: Project Management, CRM, Communication, Productivity, Collaboration
+AI categories: AI Writing, AI Image, AI Coding, AI Productivity, AI Video & Audio
+
+Selection criteria:
+- Actively used and well-known in 2026
+- Has clear competitors already in our database (for comparison pages)
+- High search volume for "[tool name] vs [competitor]" queries
+- Has an affiliate or referral program
+
+Return a JSON array of exactly 3 tool objects:
+[
+  {
+    "slug": "url-friendly-slug-lowercase-hyphens",
+    "name": "Exact Tool Name",
+    "category": "one of the categories listed above",
+    "description": "2-3 sentences describing what the tool does and who uses it",
+    "website": "domain.com without https://",
+    "pricing": "Accurate pricing description including free plan if available, paid tiers with prices",
+    "rating": <number between 4.0 and 4.9>,
+    "features": ["feature 1", "feature 2", "feature 3", "feature 4", "feature 5", "feature 6"],
+    "pros": ["specific pro 1", "specific pro 2", "specific pro 3"],
+    "cons": ["specific con 1", "specific con 2"],
+    "bestFor": "1-2 sentences describing the ideal user or team for this tool"
+  }
+]
+Return only valid JSON array. No markdown fences, no explanation, no comments.`;
 }
 
 const REQUIRED_TOOL_FIELDS = ['slug', 'name', 'category', 'description', 'website', 'pricing', 'rating', 'features', 'pros', 'cons', 'bestFor'];
