@@ -14,7 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      affiliate_urls: {
+        Row: {
+          affiliate_url: string
+          created_at: string | null
+          id: string
+          tool_name: string
+          tool_slug: string
+          updated_at: string | null
+        }
+        Insert: {
+          affiliate_url: string
+          created_at?: string | null
+          id?: string
+          tool_name: string
+          tool_slug: string
+          updated_at?: string | null
+        }
+        Update: {
+          affiliate_url?: string
+          created_at?: string | null
+          id?: string
+          tool_name?: string
+          tool_slug?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
