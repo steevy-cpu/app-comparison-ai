@@ -51,6 +51,7 @@ export const comparisons: Comparison[] = [
     category: "Project Management",
     summary: "Trello is a lightweight Kanban tool ideal for simple workflows, while Asana is a full-featured project management platform.",
     verdict: "Choose Trello for small teams with simple needs. Choose Asana when projects require timelines, dependencies, and cross-team visibility.",
+    updatedAt: "January 2026",
     criteria: [
       { label: "Simplicity", toolA: "Excellent", toolB: "Good" },
       { label: "Scalability", toolA: "Limited", toolB: "Excellent" },
