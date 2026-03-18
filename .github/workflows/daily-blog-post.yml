@@ -1,0 +1,26 @@
+name: Daily Blog Post
+on:
+  schedule:
+    - cron: '0 8 * * *'  # Every day at 8am UTC
+  workflow_dispatch:       # Manual trigger from GitHub UI
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm install
+      - name: Generate blog post
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/generate-blog-post.mjs
+      - name: Commit new post
+        run: |
+          git config user.name "AppRival Bot"
+          git config user.email "bot@apprival.net"
+          git add src/data/posts.ts
+          git diff --staged --quiet || git commit -m "content: auto-publish blog post $(date +'%Y-%m-%d')"
+          git push
