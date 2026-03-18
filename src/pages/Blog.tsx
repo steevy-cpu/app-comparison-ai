@@ -11,6 +11,7 @@ const Blog = () => {
         title="Blog"
         description="Guides, deep dives, and analysis on SaaS tools and productivity software. Updated regularly by the AppRival team."
       />
+      <div className="container py-16 max-w-3xl">
         <h1 className="text-3xl font-bold text-foreground">Blog</h1>
         <p className="mt-2 text-body-muted">Guides, deep dives, and analysis on SaaS tools and productivity.</p>
 
