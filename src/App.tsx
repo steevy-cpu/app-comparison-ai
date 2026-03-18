@@ -21,6 +21,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/compare" element={<ComparePicker />} />
           <Route path="/compare/:slug" element={<ComparePage />} />
           <Route path="/tools" element={<ToolsDirectory />} />
           <Route path="/tools/:slug" element={<ToolDetail />} />

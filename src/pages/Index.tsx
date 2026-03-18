@@ -25,7 +25,7 @@ const Index = () => {
         </p>
         <div className="mt-8 flex items-center gap-4">
           <Link
-            to="/compare/notion-vs-asana"
+            to="/compare"
             className="bg-accent text-accent-foreground text-sm font-medium px-5 py-2.5 rounded-lg hover:opacity-90 transition-opacity duration-150"
           >
             Compare Tools
