@@ -24,6 +24,11 @@ export default {
         foreground: "hsl(var(--foreground))",
         body: "hsl(var(--body))",
         "body-muted": "hsl(var(--body-muted))",
+        "verdict-bg": "hsl(var(--verdict-bg))",
+        "verdict-border": "hsl(var(--verdict-border))",
+        success: "hsl(var(--success))",
+        danger: "hsl(var(--danger))",
+        "row-alt": "hsl(var(--row-alt))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
