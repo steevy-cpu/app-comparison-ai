@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout";
+import SEO from "@/components/SEO";
 import { Link } from "react-router-dom";
 import { posts } from "@/data/posts";
 import { Badge } from "@/components/ui/badge";
