@@ -353,7 +353,7 @@ async function main() {
 
   let suggestedTools;
   try {
-    suggestedTools = JSON.parse(stripJsonFences(toolResponse));
+    suggestedTools = robustJsonParse(toolResponse);
   } catch {
     console.error('❌ Claude returned invalid JSON for tool discovery');
     console.error(toolResponse);
