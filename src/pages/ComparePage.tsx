@@ -1,4 +1,5 @@
 import { useParams, Link } from "react-router-dom";
+import { useAffiliateUrl } from "@/hooks/useAffiliateUrl";
 import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
