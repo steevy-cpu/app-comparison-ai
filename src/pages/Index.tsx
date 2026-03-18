@@ -58,7 +58,7 @@ const Index = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.15 }}
         >
-          AI-powered SaaS comparisons updated automatically. Find the right tool for your team in minutes.
+          AI-powered comparisons for SaaS and AI tools — updated automatically. Find the right tool for your team in minutes.
         </motion.p>
         <motion.div
           className="mt-8 flex items-center gap-4"
