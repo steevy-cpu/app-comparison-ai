@@ -34,6 +34,7 @@ export const comparisons: Comparison[] = [
     category: "Project Management",
     summary: "Monday.com prioritizes visual simplicity and ease of use, while ClickUp offers more features and flexibility at a lower price point.",
     verdict: "Choose Monday if your team values a polished, easy-to-adopt interface. Choose ClickUp if you want maximum features per dollar.",
+    updatedAt: "February 2026",
     criteria: [
       { label: "Ease of Use", toolA: "Easy", toolB: "Moderate" },
       { label: "Features", toolA: "Good", toolB: "Excellent" },
