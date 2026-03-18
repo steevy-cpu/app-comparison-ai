@@ -10,6 +10,7 @@ export interface Tool {
   pros: string[];
   cons: string[];
   bestFor: string;
+  affiliateUrl?: string;
 }
 
 export const tools: Tool[] = [

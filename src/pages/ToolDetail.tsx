@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { ExternalLink, Star } from "lucide-react";
+import { getToolUrl } from "@/lib/affiliate";
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import { tools, getToolBySlug } from "@/data/tools";
@@ -43,7 +44,7 @@ const ToolDetail = () => {
 
         <div className="mt-6 flex items-center gap-6 text-sm">
           <span className="text-body-muted">Pricing: <span className="text-foreground font-medium">{tool.pricing}</span></span>
-          <a href={`https://${tool.website}`} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline inline-flex items-center gap-1">
+          <a href={getToolUrl(tool)} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline inline-flex items-center gap-1">
             {tool.website} <ExternalLink size={12} />
           </a>
         </div>

@@ -132,6 +132,7 @@ const Index = () => {
                     <span className="text-xs border rounded px-2 py-0.5 text-body-muted">{c.category}</span>
                   </div>
                   <p className="text-sm text-body-muted truncate max-w-md">{c.summary}</p>
+                  <span className="text-xs text-body-muted hidden sm:inline shrink-0">{c.updatedAt}</span>
                 </Link>
               );
             })}

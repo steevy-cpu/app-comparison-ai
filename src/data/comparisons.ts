@@ -5,6 +5,7 @@ export interface Comparison {
   category: string;
   summary: string;
   verdict: string;
+  updatedAt: string;
   criteria: { label: string; toolA: string; toolB: string }[];
 }
 
@@ -16,6 +17,7 @@ export const comparisons: Comparison[] = [
     category: "Project Management",
     summary: "Notion excels as a flexible workspace for docs and knowledge bases, while Asana is purpose-built for structured project and task management.",
     verdict: "Choose Notion if documentation is central to your workflow. Choose Asana if you need clear task ownership, timelines, and project reporting.",
+    updatedAt: "March 2026",
     criteria: [
       { label: "Task Management", toolA: "Good", toolB: "Excellent" },
       { label: "Documentation", toolA: "Excellent", toolB: "Limited" },
@@ -32,6 +34,7 @@ export const comparisons: Comparison[] = [
     category: "Project Management",
     summary: "Monday.com prioritizes visual simplicity and ease of use, while ClickUp offers more features and flexibility at a lower price point.",
     verdict: "Choose Monday if your team values a polished, easy-to-adopt interface. Choose ClickUp if you want maximum features per dollar.",
+    updatedAt: "February 2026",
     criteria: [
       { label: "Ease of Use", toolA: "Easy", toolB: "Moderate" },
       { label: "Features", toolA: "Good", toolB: "Excellent" },
@@ -48,6 +51,7 @@ export const comparisons: Comparison[] = [
     category: "Project Management",
     summary: "Trello is a lightweight Kanban tool ideal for simple workflows, while Asana is a full-featured project management platform.",
     verdict: "Choose Trello for small teams with simple needs. Choose Asana when projects require timelines, dependencies, and cross-team visibility.",
+    updatedAt: "January 2026",
     criteria: [
       { label: "Simplicity", toolA: "Excellent", toolB: "Good" },
       { label: "Scalability", toolA: "Limited", toolB: "Excellent" },
@@ -64,6 +68,7 @@ export const comparisons: Comparison[] = [
     category: "Project Management",
     summary: "Both are all-in-one platforms, but Notion leans toward knowledge management while ClickUp is more task-oriented.",
     verdict: "Choose Notion for a docs-first approach. Choose ClickUp if task tracking and project execution are your priorities.",
+    updatedAt: "February 2026",
     criteria: [
       { label: "Documentation", toolA: "Excellent", toolB: "Good" },
       { label: "Task Management", toolA: "Good", toolB: "Excellent" },
@@ -80,6 +85,7 @@ export const comparisons: Comparison[] = [
     category: "Team Productivity",
     summary: "Slack is a team messaging platform, while Linear is an issue tracker. They serve different purposes but often coexist in engineering workflows.",
     verdict: "These tools complement each other. Use Slack for communication and Linear for issue tracking—most teams use both.",
+    updatedAt: "March 2026",
     criteria: [
       { label: "Primary Use", toolA: "Messaging", toolB: "Issue Tracking" },
       { label: "Speed", toolA: "Fast", toolB: "Blazing Fast" },
@@ -96,6 +102,7 @@ export const comparisons: Comparison[] = [
     category: "Database",
     summary: "Airtable is a powerful spreadsheet-database hybrid, while Notion offers database features within a broader workspace context.",
     verdict: "Choose Airtable for serious data management. Choose Notion if you need databases alongside docs and project management.",
+    updatedAt: "January 2026",
     criteria: [
       { label: "Data Modeling", toolA: "Excellent", toolB: "Good" },
       { label: "Documentation", toolA: "None", toolB: "Excellent" },
@@ -112,6 +119,7 @@ export const comparisons: Comparison[] = [
     category: "Project Management",
     summary: "Jira is built for software teams running agile workflows, while Asana provides a more accessible project management experience for cross-functional teams.",
     verdict: "Choose Jira if your team runs Scrum or Kanban sprints and needs deep configurability. Choose Asana if you need a cleaner interface that works for both technical and non-technical teams.",
+    updatedAt: "March 2026",
     criteria: [
       { label: "Ease of Use", toolA: "Moderate", toolB: "Easy" },
       { label: "Customization", toolA: "Excellent", toolB: "Good" },
@@ -128,6 +136,7 @@ export const comparisons: Comparison[] = [
     category: "CRM",
     summary: "HubSpot offers a user-friendly CRM with strong marketing tools and a generous free tier, while Salesforce provides unmatched enterprise customization and scalability.",
     verdict: "Choose HubSpot if you're a small-to-mid-size business that wants fast setup and integrated marketing. Choose Salesforce if you need enterprise-grade customization and can invest in admin resources.",
+    updatedAt: "February 2026",
     criteria: [
       { label: "Ease of Use", toolA: "Easy", toolB: "Moderate" },
       { label: "Customization", toolA: "Good", toolB: "Excellent" },
@@ -144,6 +153,7 @@ export const comparisons: Comparison[] = [
     category: "Project Management",
     summary: "Both Notion and Coda are doc-first platforms that blend documents with databases, but they differ in their approach to formulas, automation, and community ecosystem.",
     verdict: "Choose Notion if you want a larger template ecosystem and broader adoption. Choose Coda if you need more powerful formulas and want to build app-like workflows inside documents.",
+    updatedAt: "January 2026",
     criteria: [
       { label: "Documentation", toolA: "Excellent", toolB: "Excellent" },
       { label: "Formulas", toolA: "Good", toolB: "Excellent" },
@@ -160,6 +170,7 @@ export const comparisons: Comparison[] = [
     category: "Project Management",
     summary: "ClickUp is a feature-rich platform that tries to do everything, while Basecamp takes an opinionated, minimalist approach to project management.",
     verdict: "Choose ClickUp if your team wants maximum features and customization. Choose Basecamp if you value simplicity and want a tool that makes decisions for you.",
+    updatedAt: "March 2026",
     criteria: [
       { label: "Features", toolA: "Excellent", toolB: "Basic" },
       { label: "Simplicity", toolA: "Limited", toolB: "Excellent" },
@@ -176,6 +187,7 @@ export const comparisons: Comparison[] = [
     category: "Project Management",
     summary: "Todoist is a fast, text-based task manager for personal productivity, while Trello uses a visual Kanban approach better suited for team collaboration.",
     verdict: "Choose Todoist if you're an individual or small team that values speed and natural language input. Choose Trello if you prefer visual boards and need lightweight team collaboration.",
+    updatedAt: "February 2026",
     criteria: [
       { label: "Speed", toolA: "Blazing Fast", toolB: "Fast" },
       { label: "Visual Design", toolA: "Good", toolB: "Excellent" },
@@ -192,6 +204,7 @@ export const comparisons: Comparison[] = [
     category: "Issue Tracking",
     summary: "Jira is the established enterprise issue tracker with deep configurability, while Linear is a modern, fast alternative built for teams that value speed over customization.",
     verdict: "Choose Jira if you need enterprise-grade configurability and Atlassian ecosystem integration. Choose Linear if you want a fast, opinionated tool that gets out of your way.",
+    updatedAt: "January 2026",
     criteria: [
       { label: "Speed", toolA: "Moderate", toolB: "Blazing Fast" },
       { label: "Customization", toolA: "Excellent", toolB: "Limited" },

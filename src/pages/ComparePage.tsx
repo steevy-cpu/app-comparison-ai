@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Check, Minus, ThumbsUp, ThumbsDown, ExternalLink } from "lucide-react";
+import { getToolUrl } from "@/lib/affiliate";
 
 /** Map qualitative scores to a 1–10 numeric value for the bar chart */
 function scoreToNumber(score: string): number {
@@ -116,6 +117,8 @@ const ComparePage = () => {
       </div>
 
       <div className="container py-10 max-w-4xl">
+        {/* Last updated */}
+        <p className="text-xs text-body-muted text-right mb-6">Last updated: {comparison.updatedAt}</p>
         {/* 2. Comparison Header */}
         <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-6 md:gap-8 items-start">
           <ToolHeaderBlock tool={toolA} />
@@ -273,7 +276,7 @@ function ToolHeaderBlock({ tool }: { tool: ReturnType<typeof getToolBySlug> }) {
       <Badge variant="outline" className="mt-2 text-xs">{tool.category}</Badge>
       <p className="mt-3 text-sm text-body leading-relaxed">{tool.description}</p>
       <a
-        href={`https://${tool.website}`}
+        href={getToolUrl(tool)}
         target="_blank"
         rel="noopener noreferrer"
         className="mt-3 inline-flex items-center gap-1 text-xs text-accent hover:underline"
@@ -326,7 +329,7 @@ function PricingBox({ tool }: { tool: ReturnType<typeof getToolBySlug> }) {
       <h4 className="font-bold text-foreground text-sm">{tool.name}</h4>
       <p className="mt-2 text-lg font-semibold text-foreground">{tool.pricing}</p>
       <a
-        href={`https://${tool.website}`}
+        href={getToolUrl(tool)}
         target="_blank"
         rel="noopener noreferrer"
         className="mt-3 inline-flex items-center gap-1 text-xs text-accent hover:underline"
