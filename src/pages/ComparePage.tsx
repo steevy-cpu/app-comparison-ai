@@ -341,12 +341,13 @@ function ProConBox({ tool }: { tool: ReturnType<typeof getToolBySlug> }) {
 
 function PricingBox({ tool }: { tool: ReturnType<typeof getToolBySlug> }) {
   if (!tool) return null;
+  const affiliateUrl = useAffiliateUrl(tool.slug, getToolUrl(tool));
   return (
     <div className="border border-border rounded-lg p-5 hover:shadow-sm transition-shadow duration-200">
       <h4 className="font-bold text-foreground text-sm">{tool.name}</h4>
       <p className="mt-2 text-lg font-semibold text-foreground">{tool.pricing}</p>
       <a
-        href={getToolUrl(tool)}
+        href={affiliateUrl}
         target="_blank"
         rel="noopener noreferrer"
         className="mt-3 inline-flex items-center gap-1 text-xs text-accent hover:underline"
