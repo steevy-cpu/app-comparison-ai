@@ -1,0 +1,26 @@
+name: Update Comparisons
+on:
+  schedule:
+    - cron: '0 6 * * 1'  # Every Monday at 6am UTC
+  workflow_dispatch:       # Also allow manual trigger from GitHub UI
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm install
+      - name: Run update script
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/update-comparisons.mjs
+      - name: Commit updated data
+        run: |
+          git config user.name "AppRival Bot"
+          git config user.email "bot@apprival.net"
+          git add src/data/comparisons.ts
+          git diff --staged --quiet || git commit -m "chore: auto-update comparisons $(date +'%Y-%m-%d')"
+          git push
