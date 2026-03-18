@@ -40,7 +40,10 @@ const ComparePicker = () => {
 
   return (
     <Layout>
-      {/* Breadcrumb */}
+      <SEO
+        title="Compare SaaS Tools"
+        description="Pick any two SaaS tools and get an instant detailed comparison. Features, pricing, pros and cons — all in one place."
+      />
       <div className="border-b border-border">
         <div className="container py-3">
           <Breadcrumb>
