@@ -25,8 +25,8 @@ const Navbar = () => {
   return (
     <nav ref={navRef} className="sticky top-0 z-50 bg-background border-b">
       <div className="container flex items-center justify-between h-14">
-        <Link to="/" className="text-lg font-bold text-foreground tracking-tight">
-          AppRival
+        <Link to="/">
+          <img src="/logo.svg" alt="AppRival" style={{ height: 28, width: 'auto' }} />
         </Link>
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
