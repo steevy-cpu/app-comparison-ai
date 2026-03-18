@@ -329,7 +329,7 @@ function PricingBox({ tool }: { tool: ReturnType<typeof getToolBySlug> }) {
       <h4 className="font-bold text-foreground text-sm">{tool.name}</h4>
       <p className="mt-2 text-lg font-semibold text-foreground">{tool.pricing}</p>
       <a
-        href={`https://${tool.website}`}
+        href={getToolUrl(tool)}
         target="_blank"
         rel="noopener noreferrer"
         className="mt-3 inline-flex items-center gap-1 text-xs text-accent hover:underline"
