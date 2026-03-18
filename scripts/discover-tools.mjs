@@ -11,6 +11,14 @@ if (!ANTHROPIC_API_KEY) {
   process.exit(1);
 }
 
+function stripJsonFences(text) {
+  return text
+    .replace(/^```json\s*/i, '')
+    .replace(/^```\s*/i, '')
+    .replace(/```\s*$/i, '')
+    .trim();
+}
+
 // ---------------------------------------------------------------------------
 // 1. Parsers (same pattern as existing scripts)
 // ---------------------------------------------------------------------------
