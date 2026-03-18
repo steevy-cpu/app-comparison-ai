@@ -153,6 +153,7 @@ export const comparisons: Comparison[] = [
     category: "Project Management",
     summary: "Both Notion and Coda are doc-first platforms that blend documents with databases, but they differ in their approach to formulas, automation, and community ecosystem.",
     verdict: "Choose Notion if you want a larger template ecosystem and broader adoption. Choose Coda if you need more powerful formulas and want to build app-like workflows inside documents.",
+    updatedAt: "January 2026",
     criteria: [
       { label: "Documentation", toolA: "Excellent", toolB: "Excellent" },
       { label: "Formulas", toolA: "Good", toolB: "Excellent" },
