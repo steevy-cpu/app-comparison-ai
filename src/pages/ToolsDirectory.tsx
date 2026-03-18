@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Star, Check } from "lucide-react";
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import { tools } from "@/data/tools";
@@ -24,7 +26,7 @@ const ToolsDirectory = () => {
         <div className="mt-6 flex flex-wrap gap-2">
           <button
             onClick={() => setFilter(null)}
-            className={`text-xs border rounded-lg px-3 py-1 transition-colors duration-150 ${!filter ? "bg-foreground text-background" : "text-body-muted hover:text-foreground"}`}
+            className={`text-xs border rounded-lg px-3 py-1 transition-all duration-200 ${!filter ? "bg-accent text-accent-foreground border-accent" : "text-body-muted hover:text-foreground"}`}
           >
             All
           </button>
@@ -32,34 +34,51 @@ const ToolsDirectory = () => {
             <button
               key={cat}
               onClick={() => setFilter(cat)}
-              className={`text-xs border rounded-lg px-3 py-1 transition-colors duration-150 ${filter === cat ? "bg-foreground text-background" : "text-body-muted hover:text-foreground"}`}
+              className={`text-xs border rounded-lg px-3 py-1 transition-all duration-200 ${filter === cat ? "bg-accent text-accent-foreground border-accent" : "text-body-muted hover:text-foreground"}`}
             >
               {cat}
             </button>
           ))}
         </div>
 
-        {/* List */}
-        <div className="mt-8 divide-y">
-          {filtered.map((tool) => (
-            <div
+        {/* Card Grid */}
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {filtered.map((tool, index) => (
+            <motion.div
               key={tool.slug}
-              className="flex flex-col sm:flex-row sm:items-center justify-between py-4 gap-2 group"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.05 }}
             >
-              <Link to={`/tools/${tool.slug}`} className="flex-1 min-w-0">
-                <span className="font-semibold text-foreground group-hover:text-accent transition-colors duration-150">
-                  {tool.name}
-                </span>
-                <span className="text-xs border rounded px-2 py-0.5 text-body-muted ml-3">{tool.category}</span>
-                <p className="text-sm text-body-muted truncate max-w-md mt-1 sm:mt-0">{tool.description}</p>
-              </Link>
               <Link
-                to="/compare"
-                className="text-xs text-accent hover:underline shrink-0"
+                to={`/tools/${tool.slug}`}
+                className="block border border-border rounded-xl p-5 hover:border-accent/50 hover:shadow-md transition-all duration-200 group cursor-pointer h-full"
               >
-                Compare
+                <div className="flex items-start justify-between">
+                  <div>
+                    <span className="font-semibold text-foreground group-hover:text-accent transition-colors duration-150">
+                      {tool.name}
+                    </span>
+                    <span className="text-xs border rounded px-2 py-0.5 text-body-muted ml-2">{tool.category}</span>
+                  </div>
+                  <div className="flex items-center gap-1 text-xs text-body-muted shrink-0">
+                    <Star size={12} className="text-accent fill-accent" />
+                    {tool.rating}
+                  </div>
+                </div>
+                <p className="text-sm text-body-muted mt-2 line-clamp-2">{tool.description}</p>
+                <div className="mt-3 flex items-center justify-between">
+                  <div className="flex items-center gap-1 text-xs text-body-muted">
+                    <Check size={12} className="text-accent" />
+                    {tool.features.length} features
+                  </div>
+                  <span className="text-xs text-accent group-hover:underline">
+                    Compare →
+                  </span>
+                </div>
               </Link>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

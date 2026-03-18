@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Search, Sparkles, CheckCircle } from "lucide-react";
+import { Search, Sparkles, CheckCircle, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import { comparisons } from "@/data/comparisons";
@@ -42,37 +43,58 @@ const Index = () => {
       />
 
       {/* Hero */}
-      <section className="container pt-20 pb-16">
-        <h1 className="text-4xl sm:text-5xl font-bold text-foreground leading-tight max-w-xl">
+      <section className="container pt-20 pb-16 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(79,70,229,0.08),transparent)]">
+        <motion.h1
+          className="text-4xl sm:text-5xl font-bold text-foreground leading-tight max-w-xl"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           Stop guessing.<br />Start comparing.
-        </h1>
-        <p className="mt-5 text-body-muted max-w-lg text-lg">
+        </motion.h1>
+        <motion.p
+          className="mt-5 text-body-muted max-w-lg text-lg"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+        >
           AI-powered SaaS comparisons updated automatically. Find the right tool for your team in minutes.
-        </p>
-        <div className="mt-8 flex items-center gap-4">
+        </motion.p>
+        <motion.div
+          className="mt-8 flex items-center gap-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
           <Link
             to="/compare"
-            className="bg-accent text-accent-foreground text-sm font-medium px-5 py-2.5 rounded-lg hover:opacity-90 transition-opacity duration-150"
+            className="bg-accent text-accent-foreground text-sm font-medium px-6 py-3 rounded-lg hover:bg-accent/90 hover:shadow-lg hover:shadow-accent/20 transition-all duration-200"
           >
             Compare Tools
           </Link>
           <Link to="/tools" className="text-sm font-medium text-accent hover:underline">
             Browse All Tools →
           </Link>
-        </div>
+        </motion.div>
 
         {/* Search */}
-        <div ref={wrapperRef} className="mt-6 relative max-w-sm">
+        <motion.div
+          ref={wrapperRef}
+          className="mt-6 relative max-w-sm"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.35 }}
+        >
           <input
             type="text"
             value={query}
             onChange={(e) => { setQuery(e.target.value); setOpen(true); }}
             onFocus={() => setOpen(true)}
             placeholder="Search tools... (e.g. Notion, Asana)"
-            className="w-full border border-border rounded-lg px-4 py-2 text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-accent"
+            className="w-full border border-border rounded-lg px-4 py-2 text-sm bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent transition-all duration-200"
           />
           {open && filtered.length > 0 && (
-            <div className="absolute top-full left-0 right-0 mt-1 bg-background border border-border rounded-lg shadow-sm z-10">
+            <div className="absolute top-full left-0 right-0 mt-1 bg-background border border-border rounded-lg shadow-sm z-10 animate-fade-in">
               {filtered.map((tool) => (
                 <button
                   key={tool.slug}
@@ -84,33 +106,55 @@ const Index = () => {
               ))}
             </div>
           )}
-        </div>
+        </motion.div>
 
-        <div className="mt-6 flex flex-wrap gap-2">
+        <motion.div
+          className="mt-6 flex flex-wrap gap-2"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.45 }}
+        >
           {toolPills.map((name) => (
-            <span key={name} className="text-xs border rounded-lg px-3 py-1 text-body-muted">
+            <span
+              key={name}
+              className="text-sm border border-border rounded-full px-4 py-1.5 text-body-muted hover:border-accent hover:text-accent transition-all duration-200 cursor-pointer"
+            >
               {name}
             </span>
           ))}
-        </div>
+        </motion.div>
       </section>
 
       {/* How it works */}
-      <section className="border-t">
-        <div className="container py-16 grid grid-cols-1 sm:grid-cols-3 gap-10">
-          {steps.map((step) => (
-            <div key={step.label}>
-              <step.icon className="text-accent mb-3" size={20} />
-              <h3 className="text-sm font-bold text-foreground">{step.label}</h3>
+      <section className="border-t bg-secondary/30">
+        <div className="container py-16 grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {steps.map((step, index) => (
+            <motion.div
+              key={step.label}
+              className="border border-border rounded-xl p-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.15 }}
+            >
+              <div className="rounded-xl bg-accent/10 p-3 w-fit">
+                <step.icon className="text-accent" size={20} />
+              </div>
+              <h3 className="mt-4 text-sm font-bold text-foreground">{step.label}</h3>
               <p className="mt-1 text-sm text-body-muted">{step.desc}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
 
       {/* Popular Comparisons */}
       <section className="border-t">
-        <div className="container py-16">
+        <motion.div
+          className="container py-16"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl font-bold text-foreground">Popular Comparisons</h2>
             <Link to="/tools" className="text-sm text-accent hover:underline">View all →</Link>
@@ -123,7 +167,7 @@ const Index = () => {
                 <Link
                   key={c.slug}
                   to={`/compare/${c.slug}`}
-                  className="flex flex-col sm:flex-row sm:items-center justify-between py-4 gap-2 group"
+                  className="flex flex-col sm:flex-row sm:items-center justify-between py-4 gap-2 group hover:bg-secondary/50 transition-colors duration-150 rounded-lg px-3 -mx-3"
                 >
                   <div className="flex items-center gap-3">
                     <span className="font-semibold text-foreground group-hover:text-accent transition-colors duration-150">
@@ -132,12 +176,15 @@ const Index = () => {
                     <span className="text-xs border rounded px-2 py-0.5 text-body-muted">{c.category}</span>
                   </div>
                   <p className="text-sm text-body-muted truncate max-w-md">{c.summary}</p>
-                  <span className="text-xs text-body-muted hidden sm:inline shrink-0">{c.updatedAt}</span>
+                  <span className="hidden sm:flex items-center gap-1 text-xs text-body-muted shrink-0">
+                    {c.updatedAt}
+                    <ArrowRight size={12} className="opacity-0 group-hover:opacity-100 translate-x-0 group-hover:translate-x-1 transition-all duration-150" />
+                  </span>
                 </Link>
               );
             })}
           </div>
-        </div>
+        </motion.div>
       </section>
     </Layout>
   );
