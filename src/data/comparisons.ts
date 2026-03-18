@@ -170,6 +170,7 @@ export const comparisons: Comparison[] = [
     category: "Project Management",
     summary: "ClickUp is a feature-rich platform that tries to do everything, while Basecamp takes an opinionated, minimalist approach to project management.",
     verdict: "Choose ClickUp if your team wants maximum features and customization. Choose Basecamp if you value simplicity and want a tool that makes decisions for you.",
+    updatedAt: "March 2026",
     criteria: [
       { label: "Features", toolA: "Excellent", toolB: "Basic" },
       { label: "Simplicity", toolA: "Limited", toolB: "Excellent" },
