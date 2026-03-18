@@ -133,6 +133,8 @@ Return a JSON object:
   "readingTime": "X min read",
   "content": "<h2>Section 1</h2><p>...</p><h2>Section 2</h2><p>...</p>..."
 }
+IMPORTANT: The content field must be a valid JSON string. Escape all double quotes inside HTML attributes as \\". Do not use single quotes for HTML attributes. Keep HTML simple — only use these tags: <h2>, <h3>, <p>, <ul>, <li>, <strong>. No other HTML tags.
+
 Return only valid JSON. No markdown fences, no explanation.`;
 }
 
