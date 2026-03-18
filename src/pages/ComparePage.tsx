@@ -276,7 +276,7 @@ function ToolHeaderBlock({ tool }: { tool: ReturnType<typeof getToolBySlug> }) {
       <Badge variant="outline" className="mt-2 text-xs">{tool.category}</Badge>
       <p className="mt-3 text-sm text-body leading-relaxed">{tool.description}</p>
       <a
-        href={`https://${tool.website}`}
+        href={getToolUrl(tool)}
         target="_blank"
         rel="noopener noreferrer"
         className="mt-3 inline-flex items-center gap-1 text-xs text-accent hover:underline"
