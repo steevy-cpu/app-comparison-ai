@@ -1,4 +1,5 @@
 import { useParams, Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import { comparisons, getComparisonBySlug } from "@/data/comparisons";
@@ -21,7 +22,7 @@ import {
   TableCell,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Check, Minus, ThumbsUp, ThumbsDown, ExternalLink } from "lucide-react";
+import { Check, Minus, CheckCircle, XCircle, Star, ExternalLink } from "lucide-react";
 import { getToolUrl } from "@/lib/affiliate";
 
 /** Map qualitative scores to a 1–10 numeric value for the bar chart */
@@ -31,7 +32,6 @@ function scoreToNumber(score: string): number {
   if (lower === "good" || lower === "fast" || lower === "generous" || lower === "easy") return 7;
   if (lower === "moderate" || lower === "basic" || lower === "steep") return 5;
   if (lower === "limited" || lower === "none") return 3;
-  // For pricing or freeform text, return 0 (no bar)
   return 0;
 }
 
@@ -43,9 +43,12 @@ function ScoreBar({ score }: { score: string }) {
   return (
     <div className="flex items-center gap-2">
       <div className="h-2 w-24 rounded-sm bg-secondary overflow-hidden">
-        <div
+        <motion.div
           className="h-full rounded-sm bg-accent"
-          style={{ width: `${(num / 10) * 100}%` }}
+          initial={{ width: 0 }}
+          whileInView={{ width: `${(num / 10) * 100}%` }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
         />
       </div>
       <span className="text-xs text-body-muted">{score}</span>
@@ -120,22 +123,34 @@ const ComparePage = () => {
         {/* Last updated */}
         <p className="text-xs text-body-muted text-right mb-6">Last updated: {comparison.updatedAt}</p>
         {/* 2. Comparison Header */}
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-6 md:gap-8 items-start">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-6 md:gap-8 items-start"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           <ToolHeaderBlock tool={toolA} />
-          <span className="hidden md:flex items-center justify-center text-4xl font-bold text-muted-foreground pt-2 select-none">
-            VS
+          <span className="hidden md:flex items-center justify-center select-none">
+            <span className="bg-secondary text-muted-foreground font-black text-2xl px-4 py-2 rounded-xl">VS</span>
           </span>
-          <span className="flex md:hidden items-center justify-center text-2xl font-bold text-muted-foreground select-none">
-            VS
+          <span className="flex md:hidden items-center justify-center select-none">
+            <span className="bg-secondary text-muted-foreground font-black text-xl px-3 py-1.5 rounded-xl">VS</span>
           </span>
           <ToolHeaderBlock tool={toolB} />
-        </div>
+        </motion.div>
         <p className="mt-8 text-body-muted text-sm leading-relaxed">{comparison.summary}</p>
 
         {/* 3. Verdict Banner */}
-        <div className="mt-10 border border-verdict-border rounded-lg bg-verdict-bg p-5 md:p-6 flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+        <motion.div
+          className="mt-10 bg-gradient-to-r from-accent/5 to-accent/10 border border-accent/20 rounded-lg p-5 md:p-6 flex flex-col md:flex-row md:items-start md:justify-between gap-4"
+          initial={{ opacity: 0, scale: 0.98 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+        >
           <div className="flex-1">
-            <h3 className="text-sm font-bold text-foreground uppercase tracking-wide">Our Verdict</h3>
+            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-accent uppercase tracking-wide">
+              <Star size={13} className="fill-accent text-accent" /> Our Verdict
+            </span>
             <p className="mt-2 text-sm text-body leading-relaxed">{comparison.verdict}</p>
           </div>
           <div className="flex gap-6 md:gap-8 shrink-0">
@@ -148,21 +163,21 @@ const ComparePage = () => {
               <p className="text-xl font-bold text-foreground">{toolB.rating}<span className="text-sm font-normal text-body-muted">/5</span></p>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* 4. Criteria Comparison Table */}
         <SectionHeading>Head-to-Head Breakdown</SectionHeading>
         <Table>
           <TableHeader>
-            <TableRow>
-              <TableHead className="w-[30%]">Criteria</TableHead>
-              <TableHead>{toolA.name}</TableHead>
-              <TableHead>{toolB.name}</TableHead>
+            <TableRow className="bg-secondary/50">
+              <TableHead className="w-[30%] text-xs uppercase tracking-wide text-body-muted">Criteria</TableHead>
+              <TableHead className="text-xs uppercase tracking-wide text-body-muted">{toolA.name}</TableHead>
+              <TableHead className="text-xs uppercase tracking-wide text-body-muted">{toolB.name}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {comparison.criteria.map((row, i) => (
-              <TableRow key={i} className={i % 2 === 1 ? "bg-row-alt" : ""}>
+              <TableRow key={i} className={`hover:bg-secondary/30 transition-colors duration-100 ${i % 2 === 1 ? "bg-row-alt" : ""}`}>
                 <TableCell className="font-medium text-foreground">{row.label}</TableCell>
                 <TableCell><ScoreBar score={row.toolA} /></TableCell>
                 <TableCell><ScoreBar score={row.toolB} /></TableCell>
@@ -175,14 +190,14 @@ const ComparePage = () => {
         <SectionHeading>Features</SectionHeading>
         <Table>
           <TableHeader>
-            <TableRow>
-              <TableHead>{toolA.name}</TableHead>
-              <TableHead>{toolB.name}</TableHead>
+            <TableRow className="bg-secondary/50">
+              <TableHead className="text-xs uppercase tracking-wide text-body-muted">{toolA.name}</TableHead>
+              <TableHead className="text-xs uppercase tracking-wide text-body-muted">{toolB.name}</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {Array.from({ length: maxFeatures }).map((_, i) => (
-              <TableRow key={i} className={i % 2 === 1 ? "bg-row-alt" : ""}>
+              <TableRow key={i} className={`hover:bg-secondary/30 transition-colors duration-100 ${i % 2 === 1 ? "bg-row-alt" : ""}`}>
                 <TableCell>
                   {toolA.features[i] ? (
                     <span className="flex items-center gap-2 text-sm">
@@ -244,7 +259,7 @@ const ComparePage = () => {
             if (!rA || !rB) return null;
             return (
               <div key={c.slug} className="py-3 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
-                <Link to={`/compare/${c.slug}`} className="font-semibold text-sm text-foreground hover:text-accent">
+                <Link to={`/compare/${c.slug}`} className="font-semibold text-sm text-foreground hover:text-accent transition-colors duration-150">
                   {rA.name} vs {rB.name}
                 </Link>
                 <Badge variant="outline" className="text-xs w-fit">{c.category}</Badge>
@@ -290,16 +305,16 @@ function ToolHeaderBlock({ tool }: { tool: ReturnType<typeof getToolBySlug> }) {
 function ProConBox({ tool }: { tool: ReturnType<typeof getToolBySlug> }) {
   if (!tool) return null;
   return (
-    <div className="border border-border rounded-lg p-5">
+    <div className="border border-border rounded-lg p-5 hover:shadow-sm transition-shadow duration-200">
       <h4 className="font-bold text-foreground mb-4">{tool.name}</h4>
       <div className="mb-4">
         <span className="flex items-center gap-1.5 text-xs font-semibold text-success mb-2">
-          <ThumbsUp size={13} /> Pros
+          <CheckCircle size={13} /> Pros
         </span>
         <ul className="space-y-1.5">
           {tool.pros.map((p, i) => (
             <li key={i} className="text-sm text-body flex items-start gap-2">
-              <ThumbsUp size={12} className="text-success mt-1 shrink-0" />
+              <CheckCircle size={14} className="text-success mt-0.5 shrink-0" />
               {p}
             </li>
           ))}
@@ -307,12 +322,12 @@ function ProConBox({ tool }: { tool: ReturnType<typeof getToolBySlug> }) {
       </div>
       <div>
         <span className="flex items-center gap-1.5 text-xs font-semibold text-danger mb-2">
-          <ThumbsDown size={13} /> Cons
+          <XCircle size={13} /> Cons
         </span>
         <ul className="space-y-1.5">
           {tool.cons.map((c, i) => (
             <li key={i} className="text-sm text-body flex items-start gap-2">
-              <ThumbsDown size={12} className="text-danger mt-1 shrink-0" />
+              <XCircle size={14} className="text-danger mt-0.5 shrink-0" />
               {c}
             </li>
           ))}
@@ -325,7 +340,7 @@ function ProConBox({ tool }: { tool: ReturnType<typeof getToolBySlug> }) {
 function PricingBox({ tool }: { tool: ReturnType<typeof getToolBySlug> }) {
   if (!tool) return null;
   return (
-    <div className="border border-border rounded-lg p-5">
+    <div className="border border-border rounded-lg p-5 hover:shadow-sm transition-shadow duration-200">
       <h4 className="font-bold text-foreground text-sm">{tool.name}</h4>
       <p className="mt-2 text-lg font-semibold text-foreground">{tool.pricing}</p>
       <a

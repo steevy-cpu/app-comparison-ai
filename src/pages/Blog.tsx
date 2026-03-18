@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import { Link } from "react-router-dom";
@@ -6,6 +7,18 @@ import { posts } from "@/data/posts";
 import { Badge } from "@/components/ui/badge";
 
 const POSTS_PER_PAGE = 10;
+
+const categoryColors: Record<string, string> = {
+  Guide: "bg-accent/10 text-accent border-accent/20",
+  "Deep Dive": "bg-purple-50 text-purple-700 border-purple-200",
+  Analysis: "bg-amber-50 text-amber-700 border-amber-200",
+  Tips: "bg-emerald-50 text-emerald-700 border-emerald-200",
+  Cost: "bg-red-50 text-red-700 border-red-200",
+};
+
+function getCategoryClass(category: string) {
+  return categoryColors[category] || "bg-secondary text-body-muted border-border";
+}
 
 const Blog = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -32,10 +45,19 @@ const Blog = () => {
         <p className="mt-2 text-body-muted">Guides, deep dives, and analysis on SaaS tools and productivity.</p>
 
         <div className="mt-10 divide-y">
-          {paginatedPosts.map((post) => (
-            <article key={post.slug} className="py-6">
+          {paginatedPosts.map((post, index) => (
+            <motion.article
+              key={post.slug}
+              className="py-6 hover:bg-secondary/30 rounded-xl px-4 -mx-4 transition-colors duration-150"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.05 }}
+            >
               <div className="flex items-center gap-3 text-xs text-body-muted">
-                <Badge variant="outline" className="text-xs">{post.category}</Badge>
+                <Badge variant="outline" className={`text-xs border ${getCategoryClass(post.category)}`}>
+                  {post.category}
+                </Badge>
                 <span>{post.date}</span>
                 <span>·</span>
                 <span>{post.readingTime}</span>
@@ -44,7 +66,7 @@ const Blog = () => {
                 <Link to={`/blog/${post.slug}`}>{post.title}</Link>
               </h2>
               <p className="mt-2 text-sm text-body">{post.excerpt}</p>
-            </article>
+            </motion.article>
           ))}
         </div>
 
