@@ -17,6 +17,7 @@ export const comparisons: Comparison[] = [
     category: "Project Management",
     summary: "Notion excels as a flexible workspace for docs and knowledge bases, while Asana is purpose-built for structured project and task management.",
     verdict: "Choose Notion if documentation is central to your workflow. Choose Asana if you need clear task ownership, timelines, and project reporting.",
+    updatedAt: "March 2026",
     criteria: [
       { label: "Task Management", toolA: "Good", toolB: "Excellent" },
       { label: "Documentation", toolA: "Excellent", toolB: "Limited" },
