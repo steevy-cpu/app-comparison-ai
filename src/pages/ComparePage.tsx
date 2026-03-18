@@ -117,6 +117,8 @@ const ComparePage = () => {
       </div>
 
       <div className="container py-10 max-w-4xl">
+        {/* Last updated */}
+        <p className="text-xs text-body-muted text-right mb-6">Last updated: {comparison.updatedAt}</p>
         {/* 2. Comparison Header */}
         <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-6 md:gap-8 items-start">
           <ToolHeaderBlock tool={toolA} />
