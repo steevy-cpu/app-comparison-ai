@@ -7,7 +7,7 @@ import SEO from "@/components/SEO";
 import { comparisons } from "@/data/comparisons";
 import { tools, getToolBySlug } from "@/data/tools";
 
-const toolPills = ["Notion", "Asana", "Monday", "ClickUp", "Trello", "Airtable"];
+const toolPills = ["Notion", "Asana", "Monday", "ClickUp", "Trello", "Airtable", "ChatGPT", "Claude", "Midjourney", "Copilot", "Cursor"];
 
 const steps = [
   { icon: Search, label: "Pick two tools", desc: "Select any two SaaS products you're evaluating for your team." },
