@@ -1,0 +1,28 @@
+name: Discover New Tools
+on:
+  schedule:
+    - cron: '0 7 * * 3'
+  workflow_dispatch:
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+      - name: Discover and add new tools
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/discover-tools.mjs
+      - name: Commit new tools and comparisons
+        run: |
+          git config user.name "AppRival Bot"
+          git config user.email "bot@apprival.net"
+          git add src/data/tools.ts src/data/comparisons.ts public/sitemap.xml
+          git diff --staged --quiet || git commit -m "feat: auto-discover new tools $(date +'%Y-%m-%d')"
+          git push

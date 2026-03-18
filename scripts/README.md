@@ -34,6 +34,22 @@ ANTHROPIC_API_KEY=your_key node scripts/generate-blog-post.mjs
 
 ---
 
+## 3. Tool Discovery Pipeline (`discover-tools.mjs`)
+
+**What it does:** Discovers 3 new SaaS tools via Claude AI, generates 2 comparisons per tool against existing database entries, and updates the sitemap — all automatically.
+
+**Schedule:** Every Wednesday at 7am UTC (via GitHub Actions) — chosen to avoid conflicts with Monday comparison updates and daily blog posts.
+
+**Run locally:**
+
+```bash
+ANTHROPIC_API_KEY=your_key node scripts/discover-tools.mjs
+```
+
+**⚠️ Warning:** Each run adds permanent data to `src/data/tools.ts`, `src/data/comparisons.ts`, and `public/sitemap.xml`. Do not run repeatedly without checking the database first.
+
+---
+
 ## Setting Up the GitHub Secret
 
 Both workflows share the same secret — you only need to set it once.
