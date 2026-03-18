@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Layout from "@/components/Layout";
+import SEO from "@/components/SEO";
 import { tools, Tool } from "@/data/tools";
 import { getComparisonBySlug } from "@/data/comparisons";
 import { Badge } from "@/components/ui/badge";
@@ -39,7 +40,10 @@ const ComparePicker = () => {
 
   return (
     <Layout>
-      {/* Breadcrumb */}
+      <SEO
+        title="Compare SaaS Tools"
+        description="Pick any two SaaS tools and get an instant detailed comparison. Features, pricing, pros and cons — all in one place."
+      />
       <div className="border-b border-border">
         <div className="container py-3">
           <Breadcrumb>

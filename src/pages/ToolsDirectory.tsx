@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import SEO from "@/components/SEO";
 import { tools } from "@/data/tools";
 import { useState } from "react";
 
@@ -11,6 +12,10 @@ const ToolsDirectory = () => {
 
   return (
     <Layout>
+      <SEO
+        title="Browse SaaS Tools"
+        description={`Browse our directory of ${tools.length} SaaS productivity tools with detailed reviews, pricing, and comparisons.`}
+      />
       <div className="container py-16">
         <h1 className="text-3xl font-bold text-foreground">All Tools</h1>
         <p className="mt-2 text-body-muted">Browse our directory of SaaS tools with detailed reviews and comparisons.</p>

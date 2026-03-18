@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import SEO from "@/components/SEO";
 import { comparisons, getComparisonBySlug } from "@/data/comparisons";
 import { getToolBySlug } from "@/data/tools";
 import NotFound from "./NotFound";
@@ -82,6 +83,11 @@ const ComparePage = () => {
 
   return (
     <Layout>
+      <SEO
+        title={`${toolA.name} vs ${toolB.name}`}
+        description={`${toolA.name} vs ${toolB.name}: detailed comparison of features, pricing, pros and cons. Find out which tool is right for your team.`}
+        canonical={`/compare/${comparison.slug}`}
+      />
       {/* 1. Breadcrumb */}
       <div className="border-b border-border">
         <div className="container py-3">
