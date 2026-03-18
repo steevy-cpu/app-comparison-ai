@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Layout from "@/components/Layout";
+import SEO from "@/components/SEO";
 import { tools, Tool } from "@/data/tools";
 import { getComparisonBySlug } from "@/data/comparisons";
 import { Badge } from "@/components/ui/badge";
