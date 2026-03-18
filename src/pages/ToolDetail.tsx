@@ -30,6 +30,8 @@ const ToolDetail = () => {
 
   if (!tool) return <NotFound />;
 
+  const affiliateUrl = useAffiliateUrl(tool.slug, getToolUrl(tool));
+
   const relatedComparisons = comparisons.filter(
     (c) => c.toolA === tool.slug || c.toolB === tool.slug
   );
