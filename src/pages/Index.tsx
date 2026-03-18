@@ -50,7 +50,7 @@ const Index = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          Stop guessing.<br />Start comparing.
+          Compare any tool.<br />Pick the right one.
         </motion.h1>
         <motion.p
           className="mt-5 text-body-muted max-w-lg text-lg"
