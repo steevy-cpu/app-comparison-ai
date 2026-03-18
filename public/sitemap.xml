@@ -2,25 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Static pages -->
   <url>
-    <loc>https://apprival.com/</loc>
+    <loc>https://apprival.net/</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://apprival.com/compare</loc>
+    <loc>https://apprival.net/compare</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://apprival.com/tools</loc>
+    <loc>https://apprival.net/tools</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://apprival.com/blog</loc>
+    <loc>https://apprival.net/blog</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -28,73 +28,79 @@
 
   <!-- Comparisons -->
   <url>
-    <loc>https://apprival.com/compare/notion-vs-asana</loc>
+    <loc>https://apprival.net/compare/notion-vs-asana</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://apprival.com/compare/monday-vs-clickup</loc>
+    <loc>https://apprival.net/compare/monday-vs-clickup</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://apprival.com/compare/trello-vs-asana</loc>
+    <loc>https://apprival.net/compare/trello-vs-asana</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://apprival.com/compare/notion-vs-clickup</loc>
+    <loc>https://apprival.net/compare/notion-vs-clickup</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://apprival.com/compare/slack-vs-linear</loc>
+    <loc>https://apprival.net/compare/slack-vs-linear</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://apprival.com/compare/airtable-vs-notion</loc>
+    <loc>https://apprival.net/compare/airtable-vs-notion</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://apprival.com/compare/jira-vs-asana</loc>
+    <loc>https://apprival.net/compare/jira-vs-asana</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://apprival.com/compare/hubspot-vs-salesforce</loc>
+    <loc>https://apprival.net/compare/hubspot-vs-salesforce</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://apprival.com/compare/notion-vs-coda</loc>
+    <loc>https://apprival.net/compare/notion-vs-coda</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://apprival.com/compare/clickup-vs-basecamp</loc>
+    <loc>https://apprival.net/compare/clickup-vs-basecamp</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://apprival.com/compare/todoist-vs-trello</loc>
+    <loc>https://apprival.net/compare/todoist-vs-trello</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://apprival.com/compare/jira-vs-linear</loc>
+    <loc>https://apprival.net/compare/jira-vs-linear</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://apprival.net/compare/notion-vs-notion-ai</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -102,91 +108,91 @@
 
   <!-- Tools -->
   <url>
-    <loc>https://apprival.com/tools/notion</loc>
+    <loc>https://apprival.net/tools/notion</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://apprival.com/tools/asana</loc>
+    <loc>https://apprival.net/tools/asana</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://apprival.com/tools/monday</loc>
+    <loc>https://apprival.net/tools/monday</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://apprival.com/tools/clickup</loc>
+    <loc>https://apprival.net/tools/clickup</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://apprival.com/tools/trello</loc>
+    <loc>https://apprival.net/tools/trello</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://apprival.com/tools/airtable</loc>
+    <loc>https://apprival.net/tools/airtable</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://apprival.com/tools/slack</loc>
+    <loc>https://apprival.net/tools/slack</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://apprival.com/tools/linear</loc>
+    <loc>https://apprival.net/tools/linear</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://apprival.com/tools/notion-ai</loc>
+    <loc>https://apprival.net/tools/notion-ai</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://apprival.com/tools/hubspot</loc>
+    <loc>https://apprival.net/tools/hubspot</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://apprival.com/tools/salesforce</loc>
+    <loc>https://apprival.net/tools/salesforce</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://apprival.com/tools/jira</loc>
+    <loc>https://apprival.net/tools/jira</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://apprival.com/tools/basecamp</loc>
+    <loc>https://apprival.net/tools/basecamp</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://apprival.com/tools/todoist</loc>
+    <loc>https://apprival.net/tools/todoist</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://apprival.com/tools/coda</loc>
+    <loc>https://apprival.net/tools/coda</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -194,25 +200,25 @@
 
   <!-- Blog posts -->
   <url>
-    <loc>https://apprival.com/blog/how-to-choose-a-project-management-tool</loc>
+    <loc>https://apprival.net/blog/how-to-choose-a-project-management-tool</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://apprival.com/blog/notion-vs-clickup-remote-teams</loc>
+    <loc>https://apprival.net/blog/notion-vs-clickup-remote-teams</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://apprival.com/blog/true-cost-of-saas</loc>
+    <loc>https://apprival.net/blog/true-cost-of-saas</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://apprival.com/blog/why-we-built-apprival</loc>
+    <loc>https://apprival.net/blog/why-we-built-apprival</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

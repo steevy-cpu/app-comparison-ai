@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 32" fill="none">
   <text x="0" y="24" font-family="system-ui, -apple-system, sans-serif" font-weight="700" font-size="24" letter-spacing="-0.5">
-    <tspan fill="#4F46E5">App</tspan><tspan fill="#1E1E2E">Rival</tspan>
+    <tspan fill="#4F46E5">App</tspan><tspan fill="currentColor">Rival</tspan>
   </text>
 </svg>
