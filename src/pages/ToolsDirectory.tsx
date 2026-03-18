@@ -6,7 +6,10 @@ import SEO from "@/components/SEO";
 import { tools } from "@/data/tools";
 import { useState } from "react";
 
+const AI_CATEGORIES = ["AI Writing", "AI Image", "AI Coding", "AI Productivity", "AI Video & Audio"];
 const categories = Array.from(new Set(tools.map((t) => t.category)));
+const saasCategories = categories.filter((c) => !AI_CATEGORIES.includes(c));
+const aiCategories = categories.filter((c) => AI_CATEGORIES.includes(c));
 
 const ToolsDirectory = () => {
   const [filter, setFilter] = useState<string | null>(null);
@@ -23,14 +26,29 @@ const ToolsDirectory = () => {
         <p className="mt-2 text-body-muted">Browse our directory of SaaS tools with detailed reviews and comparisons.</p>
 
         {/* Filters */}
-        <div className="mt-6 flex flex-wrap gap-2">
+        <div className="mt-6 flex flex-wrap items-center gap-2">
           <button
             onClick={() => setFilter(null)}
             className={`text-xs border rounded-lg px-3 py-1 transition-all duration-200 ${!filter ? "bg-accent text-accent-foreground border-accent" : "text-body-muted hover:text-foreground"}`}
           >
             All
           </button>
-          {categories.map((cat) => (
+          {saasCategories.length > 0 && (
+            <span className="text-xs font-semibold uppercase tracking-wide text-body-muted mr-2 ml-2">SaaS Tools</span>
+          )}
+          {saasCategories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setFilter(cat)}
+              className={`text-xs border rounded-lg px-3 py-1 transition-all duration-200 ${filter === cat ? "bg-accent text-accent-foreground border-accent" : "text-body-muted hover:text-foreground"}`}
+            >
+              {cat}
+            </button>
+          ))}
+          {aiCategories.length > 0 && (
+            <span className="text-xs font-semibold uppercase tracking-wide text-body-muted mr-2 ml-2">AI Tools</span>
+          )}
+          {aiCategories.map((cat) => (
             <button
               key={cat}
               onClick={() => setFilter(cat)}

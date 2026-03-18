@@ -7,7 +7,7 @@ import SEO from "@/components/SEO";
 import { comparisons } from "@/data/comparisons";
 import { tools, getToolBySlug } from "@/data/tools";
 
-const toolPills = ["Notion", "Asana", "Monday", "ClickUp", "Trello", "Airtable"];
+const toolPills = ["Notion", "Asana", "Monday", "ClickUp", "Trello", "Airtable", "ChatGPT", "Claude", "Midjourney", "Copilot", "Cursor"];
 
 const steps = [
   { icon: Search, label: "Pick two tools", desc: "Select any two SaaS products you're evaluating for your team." },
@@ -39,7 +39,7 @@ const Index = () => {
     <Layout>
       <SEO
         title="SaaS Tool Comparisons"
-        description="Compare the best SaaS productivity tools side by side. AI-powered, unbiased comparisons of Notion, Asana, ClickUp, Monday and more."
+        description="AI-powered comparisons for SaaS and AI tools. Compare features, pricing, and reviews for 100+ tools."
       />
 
       {/* Hero */}
@@ -50,7 +50,7 @@ const Index = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          Stop guessing.<br />Start comparing.
+          Compare any tool.<br />Pick the right one.
         </motion.h1>
         <motion.p
           className="mt-5 text-body-muted max-w-lg text-lg"
@@ -58,7 +58,7 @@ const Index = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.15 }}
         >
-          AI-powered SaaS comparisons updated automatically. Find the right tool for your team in minutes.
+          AI-powered comparisons for SaaS and AI tools — updated automatically. Find the right tool for your team in minutes.
         </motion.p>
         <motion.div
           className="mt-8 flex items-center gap-4"

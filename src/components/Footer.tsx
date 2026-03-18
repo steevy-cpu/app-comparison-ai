@@ -16,7 +16,7 @@ const Footer = () => {
           <Link to="/">
             <img src="/logo.svg" alt="AppRival" className="h-7 w-auto" onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.insertAdjacentHTML('afterend', '<span class="text-sm font-bold text-foreground">AppRival</span>'); }} />
           </Link>
-          <p className="mt-3 text-sm text-body-muted">Find the right tool, faster.</p>
+          <p className="mt-3 text-sm text-body-muted">Compare SaaS and AI tools. Find the right one, faster.</p>
         </div>
 
         {/* Column 2: Compare */}
