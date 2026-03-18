@@ -17,7 +17,8 @@ interface AffiliateRow {
   dirty: boolean;
 }
 
-const ADMIN_PASSWORD = "apprival2026admin";
+// Set VITE_ADMIN_PASSWORD in Lovable project settings → Environment Variables
+const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD || "apprival2026admin";
 
 function AdminLogin({ onAuth }: { onAuth: () => void }) {
   const [password, setPassword] = useState("");
