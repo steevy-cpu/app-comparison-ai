@@ -21,8 +21,8 @@ jobs:
         run: node scripts/discover-tools.mjs
       - name: Commit new tools and comparisons
         run: |
-          git config user.name "AppRival Bot"
-          git config user.email "bot@apprival.net"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add src/data/tools.ts src/data/comparisons.ts public/sitemap.xml
           git diff --staged --quiet || git commit -m "feat: auto-discover new tools $(date +'%Y-%m-%d')"
           git push
