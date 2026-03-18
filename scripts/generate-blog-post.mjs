@@ -146,7 +146,7 @@ async function main() {
 
   let newPost;
   try {
-    newPost = JSON.parse(response);
+    newPost = JSON.parse(stripJsonFences(response));
   } catch {
     console.error('❌ Claude returned invalid JSON:');
     console.error(response);

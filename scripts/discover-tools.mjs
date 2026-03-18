@@ -348,7 +348,7 @@ async function main() {
 
       let parsedComps;
       try {
-        parsedComps = JSON.parse(compResponse);
+        parsedComps = JSON.parse(stripJsonFences(compResponse));
       } catch {
         console.log(`⚠ Invalid JSON for ${newTool.name} comparisons, skipping`);
         continue;
