@@ -39,7 +39,7 @@ const Index = () => {
     <Layout>
       <SEO
         title="SaaS Tool Comparisons"
-        description="Compare the best SaaS productivity tools side by side. AI-powered, unbiased comparisons of Notion, Asana, ClickUp, Monday and more."
+        description="AI-powered comparisons for SaaS and AI tools. Compare features, pricing, and reviews for 100+ tools."
       />
 
       {/* Hero */}
