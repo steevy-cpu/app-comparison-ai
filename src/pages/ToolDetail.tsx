@@ -27,10 +27,9 @@ function StarRating({ rating }: { rating: number }) {
 const ToolDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const tool = slug ? getToolBySlug(slug) : undefined;
+  const affiliateUrl = useAffiliateUrl(tool?.slug ?? "", tool ? getToolUrl(tool) : "");
 
   if (!tool) return <NotFound />;
-
-  const affiliateUrl = useAffiliateUrl(tool.slug, getToolUrl(tool));
 
   const relatedComparisons = comparisons.filter(
     (c) => c.toolA === tool.slug || c.toolB === tool.slug
