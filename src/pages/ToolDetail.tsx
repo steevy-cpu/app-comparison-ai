@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ExternalLink, Star, Check } from "lucide-react";
 import { getToolUrl } from "@/lib/affiliate";
+import { useAffiliateUrl } from "@/hooks/useAffiliateUrl";
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import { tools, getToolBySlug } from "@/data/tools";
@@ -26,6 +27,7 @@ function StarRating({ rating }: { rating: number }) {
 const ToolDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const tool = slug ? getToolBySlug(slug) : undefined;
+  const affiliateUrl = useAffiliateUrl(tool?.slug ?? "", tool ? getToolUrl(tool) : "");
 
   if (!tool) return <NotFound />;
 
@@ -67,7 +69,7 @@ const ToolDetail = () => {
 
           <div className="mt-6 flex items-center gap-6 text-sm">
             <span className="text-body-muted">Pricing: <span className="text-foreground font-medium">{tool.pricing}</span></span>
-            <a href={getToolUrl(tool)} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline inline-flex items-center gap-1">
+            <a href={affiliateUrl} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline inline-flex items-center gap-1">
               {tool.website} <ExternalLink size={12} />
             </a>
           </div>

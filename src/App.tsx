@@ -8,6 +8,7 @@ import ComparePicker from "./pages/ComparePicker";
 import ComparePage from "./pages/ComparePage";
 import ToolsDirectory from "./pages/ToolsDirectory";
 import ToolDetail from "./pages/ToolDetail";
+import Admin from "./pages/Admin";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/tools/:slug" element={<ToolDetail />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

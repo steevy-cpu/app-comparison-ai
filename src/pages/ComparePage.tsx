@@ -1,4 +1,5 @@
 import { useParams, Link } from "react-router-dom";
+import { useAffiliateUrl } from "@/hooks/useAffiliateUrl";
 import { motion } from "framer-motion";
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
@@ -285,13 +286,14 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
 
 function ToolHeaderBlock({ tool }: { tool: ReturnType<typeof getToolBySlug> }) {
   if (!tool) return null;
+  const affiliateUrl = useAffiliateUrl(tool.slug, getToolUrl(tool));
   return (
     <div>
       <h1 className="text-2xl font-bold text-foreground">{tool.name}</h1>
       <Badge variant="outline" className="mt-2 text-xs">{tool.category}</Badge>
       <p className="mt-3 text-sm text-body leading-relaxed">{tool.description}</p>
       <a
-        href={getToolUrl(tool)}
+        href={affiliateUrl}
         target="_blank"
         rel="noopener noreferrer"
         className="mt-3 inline-flex items-center gap-1 text-xs text-accent hover:underline"
@@ -339,12 +341,13 @@ function ProConBox({ tool }: { tool: ReturnType<typeof getToolBySlug> }) {
 
 function PricingBox({ tool }: { tool: ReturnType<typeof getToolBySlug> }) {
   if (!tool) return null;
+  const affiliateUrl = useAffiliateUrl(tool.slug, getToolUrl(tool));
   return (
     <div className="border border-border rounded-lg p-5 hover:shadow-sm transition-shadow duration-200">
       <h4 className="font-bold text-foreground text-sm">{tool.name}</h4>
       <p className="mt-2 text-lg font-semibold text-foreground">{tool.pricing}</p>
       <a
-        href={getToolUrl(tool)}
+        href={affiliateUrl}
         target="_blank"
         rel="noopener noreferrer"
         className="mt-3 inline-flex items-center gap-1 text-xs text-accent hover:underline"
