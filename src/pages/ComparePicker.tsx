@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
-import { tools, Tool } from "@/data/tools";
+import { tools, Tool, getToolBySlug } from "@/data/tools";
 import { getComparisonBySlug } from "@/data/comparisons";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -16,9 +16,18 @@ import {
 
 const ComparePicker = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [toolA, setToolA] = useState<Tool | null>(null);
   const [toolB, setToolB] = useState<Tool | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const paramSlug = searchParams.get("toolA");
+    if (paramSlug) {
+      const found = getToolBySlug(paramSlug);
+      if (found) setToolA(found);
+    }
+  }, [searchParams]);
 
   const canCompare = toolA !== null && toolB !== null;
 
