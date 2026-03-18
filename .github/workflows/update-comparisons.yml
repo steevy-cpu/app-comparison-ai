@@ -1,18 +1,20 @@
 name: Update Comparisons
 on:
   schedule:
-    - cron: '0 6 * * 1'  # Every Monday at 6am UTC
-  workflow_dispatch:       # Also allow manual trigger from GitHub UI
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
 jobs:
   update:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
       - name: Run update script
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
