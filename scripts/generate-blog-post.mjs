@@ -64,27 +64,46 @@ function buildPrompt(existingTitles) {
   const now = new Date();
   const dateStr = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
-  return `You are a senior SaaS analyst writing for AppRival, a trusted SaaS comparison website.
+  return `You are a senior technology analyst writing for AppRival, a trusted comparison website covering both SaaS productivity tools and AI tools.
 
-Existing post titles (do not repeat these topics):
-${existingTitles.map(t => `- ${t}`).join('\n')}
+Existing post titles — do NOT repeat these topics:
+${existingTitles.join('\n')}
 
-Write a new blog post. Choose a topic from one of these categories:
-- Tool comparison deep-dive (e.g. "Notion vs Obsidian for knowledge management")
-- Buying guide (e.g. "How to choose a CRM for a 10-person startup")
-- Industry analysis (e.g. "Why project management tools are consolidating in 2026")
-- Tool-specific tips (e.g. "5 ClickUp features most teams never use")
-- Cost analysis (e.g. "The real cost of Monday.com at scale")
+Write a new, original blog post. Choose a topic from one of these categories, alternating between SaaS and AI topics to keep content varied:
 
-Return a JSON object with exactly these fields:
+SaaS topics:
+- Tool comparison deep-dive (e.g. "Notion vs ClickUp for Remote Engineering Teams")
+- Buying guide (e.g. "How to Choose a CRM for a 10-Person Startup in 2026")
+- Industry analysis (e.g. "Why Project Management Tools Are Consolidating")
+- Cost breakdown (e.g. "The Real Cost of Monday.com at Scale")
+- Workflow tips (e.g. "5 Asana Features Most Teams Never Use")
+
+AI topics:
+- AI tool comparison (e.g. "ChatGPT vs Claude: Which AI Assistant Is Right for Your Team?")
+- AI adoption guide (e.g. "How to Choose Your First AI Coding Assistant")
+- AI industry analysis (e.g. "Why Every SaaS Tool Is Adding AI Features in 2026")
+- AI productivity tips (e.g. "10 ChatGPT Prompts That Save Marketing Teams Hours Every Week")
+- AI cost analysis (e.g. "The Hidden Costs of AI Tools: What $50/Month Actually Gets You")
+
+Writing requirements:
+- Minimum 700 words
+- Specific, actionable, and genuinely useful — no filler content
+- Include real tool names, real pricing, and real feature comparisons where relevant
+- Written for professionals evaluating tools for their team
+- SEO-optimized title with year (2026) where natural
+- At least 4 sections with <h2> headings
+- Use <ul>/<li> for lists, <p> for paragraphs, <strong> for emphasis
+- No inline styles, no markdown, only clean HTML
+
+Return a JSON object:
 {
-  "slug": "url-friendly-slug-no-spaces",
-  "title": "Compelling, specific, SEO-friendly title",
+  "slug": "seo-friendly-url-slug-with-year-2026",
+  "title": "Specific, compelling, SEO-optimized title",
   "date": "${dateStr}",
-  "excerpt": "2 sentence compelling summary, under 160 chars",
+  "excerpt": "2 compelling sentences summarizing the post. Under 160 characters total.",
   "category": "one of: Guide, Deep Dive, Analysis, Tips, Cost",
   "readingTime": "X min read",
-  "content": "Full HTML article, minimum 600 words. Use <h2> for sections, <p> for paragraphs, <ul>/<li> for lists. No inline styles. Real useful content, no filler. At least 4 sections with h2 headings."
+  "content": "<h2>Section 1</h2><p>...</p><h2>Section 2</h2><p>...</p>..."
 }
 Return only valid JSON. No markdown fences, no explanation.`;
 }

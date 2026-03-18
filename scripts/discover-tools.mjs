@@ -76,33 +76,40 @@ async function callClaude(prompt, maxTokens = 2048) {
 // ---------------------------------------------------------------------------
 // 3. Discover new tools
 // ---------------------------------------------------------------------------
-function buildToolDiscoveryPrompt(existingNames) {
-  return `You are a SaaS research analyst for AppRival, a SaaS comparison website.
+function buildToolDiscoveryPrompt(existingToolNames) {
+  return `You are a SaaS and AI tools research analyst for AppRival, a tool comparison website covering both traditional SaaS products and AI tools.
 
-These tools are already in our database:
-${existingNames.map(n => `- ${n}`).join('\n')}
+These tools are already in our database — do NOT suggest any of these:
+${existingToolNames.join(', ')}
 
-Suggest exactly 3 new SaaS productivity tools we should add. Choose tools that:
-- Are actively used and well-known in 2026
-- Are NOT already in our list above
-- Fit these categories: Project Management, CRM, Communication, Productivity, or Collaboration
-- Have clear competitors already in our database (so we can create comparison pages)
+Suggest exactly 3 new tools to add to our database. Alternate between SaaS and AI tools — do not suggest 3 tools from the same category. Choose from these categories:
 
-Return a JSON array with exactly 3 objects, each with:
-{
-  "slug": "url-friendly-slug",
-  "name": "Tool Name",
-  "category": "one of the categories above",
-  "description": "2-3 sentence description of what the tool does",
-  "website": "domain.com without https://",
-  "pricing": "honest pricing description e.g. Free plan available. Paid from $X/user/month",
-  "rating": a number between 4.0 and 4.9,
-  "features": ["feature 1", "feature 2", "feature 3", "feature 4", "feature 5", "feature 6"],
-  "pros": ["pro 1", "pro 2", "pro 3"],
-  "cons": ["con 1", "con 2"],
-  "bestFor": "1-2 sentence description of ideal user"
-}
-Return only valid JSON array. No markdown, no explanation.`;
+SaaS categories: Project Management, CRM, Communication, Productivity, Collaboration
+AI categories: AI Writing, AI Image, AI Coding, AI Productivity, AI Video & Audio
+
+Selection criteria:
+- Actively used and well-known in 2026
+- Has clear competitors already in our database (for comparison pages)
+- High search volume for "[tool name] vs [competitor]" queries
+- Has an affiliate or referral program
+
+Return a JSON array of exactly 3 tool objects:
+[
+  {
+    "slug": "url-friendly-slug-lowercase-hyphens",
+    "name": "Exact Tool Name",
+    "category": "one of the categories listed above",
+    "description": "2-3 sentences describing what the tool does and who uses it",
+    "website": "domain.com without https://",
+    "pricing": "Accurate pricing description including free plan if available, paid tiers with prices",
+    "rating": <number between 4.0 and 4.9>,
+    "features": ["feature 1", "feature 2", "feature 3", "feature 4", "feature 5", "feature 6"],
+    "pros": ["specific pro 1", "specific pro 2", "specific pro 3"],
+    "cons": ["specific con 1", "specific con 2"],
+    "bestFor": "1-2 sentences describing the ideal user or team for this tool"
+  }
+]
+Return only valid JSON array. No markdown fences, no explanation, no comments.`;
 }
 
 const REQUIRED_TOOL_FIELDS = ['slug', 'name', 'category', 'description', 'website', 'pricing', 'rating', 'features', 'pros', 'cons', 'bestFor'];
@@ -120,38 +127,57 @@ function validateTool(tool) {
 // 4. Generate comparisons for a new tool
 // ---------------------------------------------------------------------------
 function findRelevantTools(newTool, existingTools) {
-  // Prefer same category, then fall back to any
-  const sameCategory = existingTools.filter(t => t.category === newTool.category);
-  const pool = sameCategory.length >= 2 ? sameCategory : existingTools;
-  return pool.slice(0, 2);
+  // Priority 1: same category
+  // Priority 2: adjacent category (e.g. AI Writing pairs well with AI Coding, CRM pairs with Project Management)
+  // Priority 3: most popular tools (Notion, Asana, ChatGPT etc — hardcode top 6 slugs as fallback)
+  const POPULAR_FALLBACKS = ['notion', 'asana', 'clickup', 'chatgpt', 'claude-ai', 'github-copilot'];
+  const sameCategory = existingTools.filter(t => t.category === newTool.category && t.slug !== newTool.slug);
+  const relevantTools = sameCategory.length >= 2
+    ? sameCategory.slice(0, 4) // pass up to 4 for Claude to choose from
+    : [
+        ...sameCategory,
+        ...existingTools.filter(t => POPULAR_FALLBACKS.includes(t.slug) && t.slug !== newTool.slug)
+      ].slice(0, 4);
+  return relevantTools;
 }
 
-function buildComparisonPrompt(newTool, existingToolA, existingToolB) {
-  return `You are writing comparison data for AppRival, a SaaS comparison website.
+function buildComparisonPrompt(newTool, relevantTools) {
+  return `You are writing comparison data for AppRival, a tool comparison website covering SaaS and AI tools.
 
-New tool: ${JSON.stringify(newTool)}
-Existing tools to compare against:
-Tool 1: ${JSON.stringify(existingToolA)}
-Tool 2: ${JSON.stringify(existingToolB)}
+New tool being added:
+Name: ${newTool.name}
+Category: ${newTool.category}
+Description: ${newTool.description}
+Pricing: ${newTool.pricing}
+Features: ${newTool.features.join(', ')}
+Pros: ${newTool.pros.join(', ')}
+Cons: ${newTool.cons.join(', ')}
 
-Generate exactly 2 comparisons — one pairing the new tool with Tool 1, and one pairing it with Tool 2. For each return:
-{
-  "slug": "tool-a-slug-vs-tool-b-slug",
-  "toolA": "slug of first tool",
-  "toolB": "slug of second tool",
-  "category": "shared category",
-  "summary": "2-3 sentence objective overview",
-  "verdict": "3-4 sentence clear recommendation of which tool wins and for whom",
-  "criteria": [
-    { "label": "Ease of Use", "toolA": "one of: Excellent/Good/Moderate/Limited/Basic/Steep/Easy/Fast/None", "toolB": "same options" },
-    { "label": "Features", "toolA": "...", "toolB": "..." },
-    { "label": "Pricing", "toolA": "...", "toolB": "..." },
-    { "label": "Integrations", "toolA": "...", "toolB": "..." },
-    { "label": "Support", "toolA": "...", "toolB": "..." }
-  ],
-  "updatedAt": "March 2026"
-}
-Return only a valid JSON array of 2 comparison objects. No markdown, no explanation.`;
+Existing tools to compare against (pick the 2 most relevant based on category and use case overlap):
+${relevantTools.map(t => `- ${t.name} (${t.category}): ${t.description}`).join('\n')}
+
+Generate exactly 2 comparison objects. For each comparison, think carefully about real differences users care about — pricing model, ease of use, feature depth, integrations, and ideal use case.
+
+Return a JSON array of exactly 2 objects:
+[
+  {
+    "slug": "${newTool.slug}-vs-[competitor-slug]",
+    "toolA": "${newTool.slug}",
+    "toolB": "[competitor-slug]",
+    "category": "[shared or closest category]",
+    "summary": "2-3 sentence objective overview comparing the two tools — what they share and where they differ",
+    "verdict": "3-4 sentence clear recommendation. State which tool wins for which use case. Be specific and opinionated.",
+    "criteria": [
+      { "label": "Ease of Use", "toolA": "[Excellent|Good|Moderate|Limited|Basic|Steep|Easy|Fast|None]", "toolB": "[same options]" },
+      { "label": "Feature Depth", "toolA": "...", "toolB": "..." },
+      { "label": "Pricing Value", "toolA": "...", "toolB": "..." },
+      { "label": "Integrations", "toolA": "...", "toolB": "..." },
+      { "label": "Best For Teams", "toolA": "...", "toolB": "..." }
+    ],
+    "updatedAt": "${new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })}"
+  }
+]
+Return only valid JSON array. No markdown fences, no explanation, no comments.`;
 }
 
 // ---------------------------------------------------------------------------
@@ -351,7 +377,7 @@ async function main() {
         continue;
       }
 
-      const compPrompt = buildComparisonPrompt(newTool, relevant[0], relevant[1]);
+      const compPrompt = buildComparisonPrompt(newTool, relevant);
       const compResponse = await callClaude(compPrompt, 2048);
 
       let parsedComps;

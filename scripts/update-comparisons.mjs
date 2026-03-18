@@ -73,34 +73,42 @@ async function callClaude(prompt) {
 // 4. Build prompt for a single comparison
 // ---------------------------------------------------------------------------
 function buildPrompt(comparison, toolA, toolB) {
-  return `You are updating a SaaS comparison website. Given these two tools:
+  return `You are a senior technology analyst updating comparison data for AppRival, a tool comparison website covering SaaS and AI tools.
 
-Tool A: ${toolA.name}
-- Description: ${toolA.description}
-- Pricing: ${toolA.pricing}
-- Features: ${toolA.features.join(', ')}
-- Pros: ${toolA.pros.join(', ')}
-- Cons: ${toolA.cons.join(', ')}
+Tool A: ${toolA.name} (${toolA.category})
+Description: ${toolA.description}
+Pricing: ${toolA.pricing}
+Features: ${toolA.features.join(', ')}
+Pros: ${toolA.pros.join(', ')}
+Cons: ${toolA.cons.join(', ')}
 
-Tool B: ${toolB.name}
-- Description: ${toolB.description}
-- Pricing: ${toolB.pricing}
-- Features: ${toolB.features.join(', ')}
-- Pros: ${toolB.pros.join(', ')}
-- Cons: ${toolB.cons.join(', ')}
+Tool B: ${toolB.name} (${toolB.category})
+Description: ${toolB.description}
+Pricing: ${toolB.pricing}
+Features: ${toolB.features.join(', ')}
+Pros: ${toolB.pros.join(', ')}
+Cons: ${toolB.cons.join(', ')}
 
 Current comparison criteria labels: ${comparison.criteria.map(c => c.label).join(', ')}
 
-Return a JSON object with exactly these fields:
+Refresh this comparison with updated, accurate content. Be specific and opinionated — vague comparisons don't help users make decisions.
+
+Requirements:
+- Summary: 2-3 sentences objectively describing what each tool does and the key difference between them
+- Verdict: 3-4 sentences with a clear recommendation. Name a winner for specific use cases. Be direct.
+- Criteria scores: use ONLY these values: Excellent, Good, Moderate, Limited, Basic, Steep, Easy, Fast, None
+- Keep the same criteria labels as the current comparison
+
+Return a JSON object:
 {
-  "summary": "2-3 sentence objective overview of both tools",
-  "verdict": "3-4 sentence clear recommendation of which tool wins and for whom",
+  "summary": "...",
+  "verdict": "...",
   "criteria": [
-    { "label": "same label as input", "toolA": "one of: Excellent/Good/Moderate/Limited/Basic/Steep/Easy/Fast/None", "toolB": "same options" }
+    { "label": "[same label]", "toolA": "[score]", "toolB": "[score]" }
   ],
   "updatedAt": "${new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })}"
 }
-Return only valid JSON, no markdown, no explanation.`;
+Return only valid JSON. No markdown fences, no explanation.`;
 }
 
 // ---------------------------------------------------------------------------
