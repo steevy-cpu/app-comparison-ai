@@ -85,6 +85,7 @@ export const comparisons: Comparison[] = [
     category: "Team Productivity",
     summary: "Slack is a team messaging platform, while Linear is an issue tracker. They serve different purposes but often coexist in engineering workflows.",
     verdict: "These tools complement each other. Use Slack for communication and Linear for issue tracking—most teams use both.",
+    updatedAt: "March 2026",
     criteria: [
       { label: "Primary Use", toolA: "Messaging", toolB: "Issue Tracking" },
       { label: "Speed", toolA: "Fast", toolB: "Blazing Fast" },
