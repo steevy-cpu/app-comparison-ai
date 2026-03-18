@@ -81,4 +81,5 @@ To run either workflow manually:
 |------|-------------|
 | Every day 8am UTC | New blog post generated and published |
 | Every Monday 6am UTC | All comparisons refreshed with updated content |
+| Every Wednesday 7am UTC | 3 new tools discovered + comparisons generated |
 | Every push to GitHub | Lovable auto-deploys the changes live |
