@@ -16,9 +16,18 @@ import {
 
 const ComparePicker = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [toolA, setToolA] = useState<Tool | null>(null);
   const [toolB, setToolB] = useState<Tool | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const paramSlug = searchParams.get("toolA");
+    if (paramSlug) {
+      const found = getToolBySlug(paramSlug);
+      if (found) setToolA(found);
+    }
+  }, [searchParams]);
 
   const canCompare = toolA !== null && toolB !== null;
 
