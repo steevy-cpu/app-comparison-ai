@@ -214,6 +214,22 @@ export const comparisons: Comparison[] = [
       { label: "Pricing", toolA: "$8.15/user/mo", toolB: "$8/member/mo" },
     ],
   },
+  {
+    slug: "notion-vs-notion-ai",
+    toolA: "notion",
+    toolB: "notion-ai",
+    category: "Productivity",
+    summary: "Notion is a full workspace for docs, databases, and project management, while Notion AI is an add-on that brings AI writing and summarization capabilities directly into that workspace.",
+    verdict: "Notion AI is not a standalone alternative — it enhances Notion. If you already use Notion and want AI-powered drafting, summarization, and Q&A without leaving your workspace, the add-on is worth it. If you don't use Notion, the AI add-on alone isn't a reason to switch.",
+    updatedAt: "March 2026",
+    criteria: [
+      { label: "Core Functionality", toolA: "Excellent", toolB: "Limited" },
+      { label: "AI Capabilities", toolA: "Basic", toolB: "Excellent" },
+      { label: "Ease of Use", toolA: "Moderate", toolB: "Easy" },
+      { label: "Standalone Value", toolA: "Excellent", toolB: "Limited" },
+      { label: "Pricing", toolA: "$10/user/mo", toolB: "$10/member/mo add-on" },
+    ],
+  },
 ];
 
 export function getComparisonBySlug(slug: string): Comparison | undefined {
