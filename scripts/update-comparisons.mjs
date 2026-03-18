@@ -208,7 +208,7 @@ async function main() {
     try {
       const prompt = buildPrompt(comp, toolA, toolB);
       const response = await callClaude(prompt);
-      const parsed = JSON.parse(stripJsonFences(response));
+      const parsed = robustJsonParse(response);
 
       comp.summary = parsed.summary;
       comp.verdict = parsed.verdict;

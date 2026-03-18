@@ -406,7 +406,7 @@ async function main() {
 
       let parsedComps;
       try {
-        parsedComps = JSON.parse(stripJsonFences(compResponse));
+        parsedComps = robustJsonParse(compResponse);
       } catch {
         console.log(`⚠ Invalid JSON for ${newTool.name} comparisons, skipping`);
         continue;
