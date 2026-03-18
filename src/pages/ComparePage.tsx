@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Check, Minus, ThumbsUp, ThumbsDown, ExternalLink } from "lucide-react";
+import { getToolUrl } from "@/lib/affiliate";
 
 /** Map qualitative scores to a 1–10 numeric value for the bar chart */
 function scoreToNumber(score: string): number {
