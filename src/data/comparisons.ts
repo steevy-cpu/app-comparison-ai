@@ -204,6 +204,7 @@ export const comparisons: Comparison[] = [
     category: "Issue Tracking",
     summary: "Jira is the established enterprise issue tracker with deep configurability, while Linear is a modern, fast alternative built for teams that value speed over customization.",
     verdict: "Choose Jira if you need enterprise-grade configurability and Atlassian ecosystem integration. Choose Linear if you want a fast, opinionated tool that gets out of your way.",
+    updatedAt: "January 2026",
     criteria: [
       { label: "Speed", toolA: "Moderate", toolB: "Blazing Fast" },
       { label: "Customization", toolA: "Excellent", toolB: "Limited" },
