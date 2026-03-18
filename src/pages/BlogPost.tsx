@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import SEO from "@/components/SEO";
 import { getPostBySlug } from "@/data/posts";
 import { Badge } from "@/components/ui/badge";
 import {
