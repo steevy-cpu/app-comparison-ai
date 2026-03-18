@@ -11,6 +11,14 @@ if (!ANTHROPIC_API_KEY) {
   process.exit(1);
 }
 
+function stripJsonFences(text) {
+  return text
+    .replace(/^```json\s*/i, '')
+    .replace(/^```\s*/i, '')
+    .replace(/```\s*$/i, '')
+    .trim();
+}
+
 // ---------------------------------------------------------------------------
 // 1. Parse existing posts from src/data/posts.ts
 // ---------------------------------------------------------------------------
@@ -146,7 +154,7 @@ async function main() {
 
   let newPost;
   try {
-    newPost = JSON.parse(response);
+    newPost = JSON.parse(stripJsonFences(response));
   } catch {
     console.error('❌ Claude returned invalid JSON:');
     console.error(response);

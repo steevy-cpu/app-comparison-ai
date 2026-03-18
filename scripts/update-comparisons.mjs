@@ -11,6 +11,14 @@ if (!ANTHROPIC_API_KEY) {
   process.exit(1);
 }
 
+function stripJsonFences(text) {
+  return text
+    .replace(/^```json\s*/i, '')
+    .replace(/^```\s*/i, '')
+    .replace(/```\s*$/i, '')
+    .trim();
+}
+
 // ---------------------------------------------------------------------------
 // 1. Parse tools from src/data/tools.ts
 // ---------------------------------------------------------------------------
@@ -168,7 +176,7 @@ async function main() {
     try {
       const prompt = buildPrompt(comp, toolA, toolB);
       const response = await callClaude(prompt);
-      const parsed = JSON.parse(response);
+      const parsed = JSON.parse(stripJsonFences(response));
 
       comp.summary = parsed.summary;
       comp.verdict = parsed.verdict;

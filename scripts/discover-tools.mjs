@@ -11,6 +11,14 @@ if (!ANTHROPIC_API_KEY) {
   process.exit(1);
 }
 
+function stripJsonFences(text) {
+  return text
+    .replace(/^```json\s*/i, '')
+    .replace(/^```\s*/i, '')
+    .replace(/```\s*$/i, '')
+    .trim();
+}
+
 // ---------------------------------------------------------------------------
 // 1. Parsers (same pattern as existing scripts)
 // ---------------------------------------------------------------------------
@@ -295,7 +303,7 @@ async function main() {
 
   let suggestedTools;
   try {
-    suggestedTools = JSON.parse(toolResponse);
+    suggestedTools = JSON.parse(stripJsonFences(toolResponse));
   } catch {
     console.error('❌ Claude returned invalid JSON for tool discovery');
     console.error(toolResponse);
@@ -348,7 +356,7 @@ async function main() {
 
       let parsedComps;
       try {
-        parsedComps = JSON.parse(compResponse);
+        parsedComps = JSON.parse(stripJsonFences(compResponse));
       } catch {
         console.log(`⚠ Invalid JSON for ${newTool.name} comparisons, skipping`);
         continue;
