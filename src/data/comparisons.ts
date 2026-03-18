@@ -187,6 +187,7 @@ export const comparisons: Comparison[] = [
     category: "Project Management",
     summary: "Todoist is a fast, text-based task manager for personal productivity, while Trello uses a visual Kanban approach better suited for team collaboration.",
     verdict: "Choose Todoist if you're an individual or small team that values speed and natural language input. Choose Trello if you prefer visual boards and need lightweight team collaboration.",
+    updatedAt: "February 2026",
     criteria: [
       { label: "Speed", toolA: "Blazing Fast", toolB: "Fast" },
       { label: "Visual Design", toolA: "Good", toolB: "Excellent" },
