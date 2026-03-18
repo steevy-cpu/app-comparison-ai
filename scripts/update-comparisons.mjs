@@ -11,12 +11,36 @@ if (!ANTHROPIC_API_KEY) {
   process.exit(1);
 }
 
-function stripJsonFences(text) {
-  return text
+function robustJsonParse(text) {
+  let cleaned = text
     .replace(/^```json\s*/i, '')
     .replace(/^```\s*/i, '')
     .replace(/```\s*$/i, '')
-    .trim();
+    .trim()
+
+  try {
+    return JSON.parse(cleaned)
+  } catch (e) {
+    const objMatch = cleaned.match(/\{[\s\S]*\}/)
+    const arrMatch = cleaned.match(/\[[\s\S]*\]/)
+    const match = objMatch || arrMatch
+    if (match) {
+      try {
+        return JSON.parse(match[0])
+      } catch (e2) {
+        const fixed = match[0]
+          .replace(/\n/g, '\\n')
+          .replace(/\r/g, '\\r')
+          .replace(/\t/g, '\\t')
+        try {
+          return JSON.parse(fixed)
+        } catch (e3) {
+          throw new Error(`Could not parse JSON after all attempts: ${e3.message}`)
+        }
+      }
+    }
+    throw new Error(`No JSON object found in response: ${e.message}`)
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -184,7 +208,7 @@ async function main() {
     try {
       const prompt = buildPrompt(comp, toolA, toolB);
       const response = await callClaude(prompt);
-      const parsed = JSON.parse(stripJsonFences(response));
+      const parsed = robustJsonParse(response);
 
       comp.summary = parsed.summary;
       comp.verdict = parsed.verdict;
