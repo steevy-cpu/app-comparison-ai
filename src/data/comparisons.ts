@@ -68,6 +68,7 @@ export const comparisons: Comparison[] = [
     category: "Project Management",
     summary: "Both are all-in-one platforms, but Notion leans toward knowledge management while ClickUp is more task-oriented.",
     verdict: "Choose Notion for a docs-first approach. Choose ClickUp if task tracking and project execution are your priorities.",
+    updatedAt: "February 2026",
     criteria: [
       { label: "Documentation", toolA: "Excellent", toolB: "Good" },
       { label: "Task Management", toolA: "Good", toolB: "Excellent" },
