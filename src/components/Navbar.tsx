@@ -26,7 +26,7 @@ const Navbar = () => {
     <nav ref={navRef} className="sticky top-0 z-50 bg-background border-b">
       <div className="container flex items-center justify-between h-14">
         <Link to="/">
-          <img src="/logo.svg" alt="AppRival" style={{ height: 28, width: 'auto' }} />
+          <img src="/logo.svg" alt="AppRival" className="h-7 w-auto" onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.insertAdjacentHTML('afterend', '<span class="text-lg font-bold text-foreground tracking-tight">AppRival</span>'); }} />
         </Link>
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
