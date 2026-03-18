@@ -136,6 +136,7 @@ export const comparisons: Comparison[] = [
     category: "CRM",
     summary: "HubSpot offers a user-friendly CRM with strong marketing tools and a generous free tier, while Salesforce provides unmatched enterprise customization and scalability.",
     verdict: "Choose HubSpot if you're a small-to-mid-size business that wants fast setup and integrated marketing. Choose Salesforce if you need enterprise-grade customization and can invest in admin resources.",
+    updatedAt: "February 2026",
     criteria: [
       { label: "Ease of Use", toolA: "Easy", toolB: "Moderate" },
       { label: "Customization", toolA: "Good", toolB: "Excellent" },
