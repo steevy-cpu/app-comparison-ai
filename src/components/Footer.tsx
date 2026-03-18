@@ -4,8 +4,8 @@ const Footer = () => {
   return (
     <footer className="border-t mt-20">
       <div className="container flex flex-col sm:flex-row items-center justify-between py-6 gap-4">
-        <Link to="/" className="text-sm font-bold text-foreground">
-          AppRival
+        <Link to="/">
+          <img src="/logo.svg" alt="AppRival" style={{ height: 28, width: 'auto' }} />
         </Link>
         <div className="flex items-center gap-6">
           <Link to="/tools" className="text-sm text-body-muted hover:text-foreground transition-colors duration-150">Tools</Link>
