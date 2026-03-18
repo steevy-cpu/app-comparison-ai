@@ -1,9 +1,17 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { tools, Tool } from "@/data/tools";
 import { getComparisonBySlug } from "@/data/comparisons";
 import { Badge } from "@/components/ui/badge";
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbSeparator,
+  BreadcrumbPage,
+} from "@/components/ui/breadcrumb";
 
 const ComparePicker = () => {
   const navigate = useNavigate();
@@ -25,30 +33,49 @@ const ComparePicker = () => {
     } else if (getComparisonBySlug(slug2)) {
       navigate(`/compare/${slug2}`);
     } else {
-      setError("We don't have this comparison yet. Try another combination.");
+      setError("We don't have this comparison yet — try another combination.");
     }
   };
 
   return (
     <Layout>
+      {/* Breadcrumb */}
+      <div className="border-b border-border">
+        <div className="container py-3">
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link to="/">Home</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>Compare</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </div>
+      </div>
+
       <div className="container py-16 max-w-5xl">
         <h1 className="text-3xl font-bold text-foreground">Compare Tools</h1>
         <p className="mt-2 text-body-muted">
-          Select two tools to see a detailed side-by-side comparison.
+          Select two tools below to see a detailed side-by-side breakdown.
         </p>
 
         <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
           <ToolColumn
-            heading="Tool A"
+            heading="Pick Tool A"
             selected={toolA}
             disabled={toolB}
-            onSelect={setToolA}
+            onSelect={(t) => { setToolA(t); setError(null); }}
           />
           <ToolColumn
-            heading="Tool B"
+            heading="Pick Tool B"
             selected={toolB}
             disabled={toolA}
-            onSelect={setToolB}
+            onSelect={(t) => { setToolB(t); setError(null); }}
           />
         </div>
 
@@ -86,9 +113,11 @@ function ToolColumn({
 }) {
   return (
     <div>
-      <h3 className="text-sm font-bold text-foreground mb-3">{heading}</h3>
-      <div className="border border-border rounded-lg divide-y divide-border">
-        {tools.map((tool) => {
+      <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-3">
+        {heading}
+      </h3>
+      <div className="border border-border rounded-lg overflow-y-auto max-h-[420px]">
+        {tools.map((tool, i) => {
           const isSelected = selected?.slug === tool.slug;
           const isDisabled = disabled?.slug === tool.slug;
 
@@ -98,10 +127,12 @@ function ToolColumn({
               onClick={() => !isDisabled && onSelect(tool)}
               disabled={isDisabled}
               className={`w-full text-left px-4 py-3 transition-colors duration-150 ${
+                i < tools.length - 1 ? "border-b border-border" : ""
+              } ${
                 isSelected
-                  ? "border-l-[3px] border-l-accent bg-verdict-bg"
+                  ? "border-l-2 border-l-accent bg-verdict-bg"
                   : isDisabled
-                  ? "opacity-40 cursor-not-allowed"
+                  ? "opacity-40 pointer-events-none"
                   : "hover:bg-secondary cursor-pointer"
               }`}
             >

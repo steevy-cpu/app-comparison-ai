@@ -1,12 +1,7 @@
 import Layout from "@/components/Layout";
 import { Link } from "react-router-dom";
-
-const posts = [
-  { title: "How to Choose a Project Management Tool in 2026", date: "Mar 12, 2026", slug: "#", excerpt: "A framework for evaluating PM tools based on team size, workflow complexity, and budget." },
-  { title: "Notion vs ClickUp: A Deep Dive for Remote Teams", date: "Mar 5, 2026", slug: "#", excerpt: "We break down the key differences for distributed teams managing docs and tasks." },
-  { title: "The True Cost of SaaS: Beyond Per-Seat Pricing", date: "Feb 28, 2026", slug: "#", excerpt: "Why the sticker price only tells half the story when comparing productivity tools." },
-  { title: "Why We Built AppRival", date: "Feb 20, 2026", slug: "#", excerpt: "The story behind our AI-powered comparison engine and why existing review sites fall short." },
-];
+import { posts } from "@/data/posts";
+import { Badge } from "@/components/ui/badge";
 
 const Blog = () => {
   return (
@@ -17,10 +12,15 @@ const Blog = () => {
 
         <div className="mt-10 divide-y">
           {posts.map((post) => (
-            <article key={post.title} className="py-6">
-              <span className="text-xs text-body-muted">{post.date}</span>
-              <h2 className="text-lg font-bold text-foreground mt-1 hover:text-accent transition-colors duration-150">
-                <Link to={post.slug}>{post.title}</Link>
+            <article key={post.slug} className="py-6">
+              <div className="flex items-center gap-3 text-xs text-body-muted">
+                <Badge variant="outline" className="text-xs">{post.category}</Badge>
+                <span>{post.date}</span>
+                <span>·</span>
+                <span>{post.readingTime}</span>
+              </div>
+              <h2 className="text-lg font-bold text-foreground mt-2 hover:text-accent transition-colors duration-150">
+                <Link to={`/blog/${post.slug}`}>{post.title}</Link>
               </h2>
               <p className="mt-2 text-sm text-body">{post.excerpt}</p>
             </article>
