@@ -119,6 +119,7 @@ export const comparisons: Comparison[] = [
     category: "Project Management",
     summary: "Jira is built for software teams running agile workflows, while Asana provides a more accessible project management experience for cross-functional teams.",
     verdict: "Choose Jira if your team runs Scrum or Kanban sprints and needs deep configurability. Choose Asana if you need a cleaner interface that works for both technical and non-technical teams.",
+    updatedAt: "March 2026",
     criteria: [
       { label: "Ease of Use", toolA: "Moderate", toolB: "Easy" },
       { label: "Customization", toolA: "Excellent", toolB: "Good" },
