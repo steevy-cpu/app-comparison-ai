@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { ExternalLink, Star } from "lucide-react";
+import { getToolUrl } from "@/lib/affiliate";
 import Layout from "@/components/Layout";
 import SEO from "@/components/SEO";
 import { tools, getToolBySlug } from "@/data/tools";
