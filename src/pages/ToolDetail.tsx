@@ -70,7 +70,7 @@ const ToolDetail = () => {
 
           <div className="mt-6 flex items-center gap-6 text-sm">
             <span className="text-body-muted">Pricing: <span className="text-foreground font-medium">{tool.pricing}</span></span>
-            <a href={getToolUrl(tool)} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline inline-flex items-center gap-1">
+            <a href={affiliateUrl} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline inline-flex items-center gap-1">
               {tool.website} <ExternalLink size={12} />
             </a>
           </div>
