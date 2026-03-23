@@ -16,9 +16,13 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
       - name: Generate blog post
+        id: generate
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: node scripts/generate-blog-post.mjs
+        run: |
+          node scripts/generate-blog-post.mjs | tee /tmp/blog-output.log
+          SLUG=$(grep -oP '(?<=Published: ).*' /tmp/blog-output.log | head -1 | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/--*/-/g' | sed 's/^-//;s/-$//')
+          echo "slug=$SLUG" >> "$GITHUB_OUTPUT"
       - name: Commit new post
         run: |
           git config user.name "github-actions[bot]"
@@ -26,3 +30,9 @@ jobs:
           git add src/data/posts.ts
           git diff --staged --quiet || git commit -m "content: auto-publish blog post $(date +'%Y-%m-%d')"
           git push
+      - name: Ping IndexNow
+        if: success()
+        run: |
+          node scripts/indexnow.mjs \
+            "https://apprival.net/blog" \
+            "https://apprival.net/blog/${{ steps.generate.outputs.slug }}"

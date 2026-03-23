@@ -50,6 +50,30 @@ ANTHROPIC_API_KEY=your_key node scripts/discover-tools.mjs
 
 ---
 
+## 4. IndexNow Ping (`indexnow.mjs`)
+
+**What it does:** Submits new or updated URLs to the [IndexNow](https://www.indexnow.org/) protocol, instantly notifying Bing, Yandex, and other compatible search engines about content changes. This dramatically speeds up indexing compared to waiting for crawlers.
+
+**How it works:**
+- A verification key file is hosted at `https://apprival.net/b64ae64acba449c1.txt`
+- The script sends a batch POST request to `api.indexnow.org` with the list of changed URLs
+- Each automation workflow calls this script automatically after committing changes
+
+**Integrated into:**
+- `daily-blog-post.yml` — pings the new blog post URL + `/blog` listing
+- `discover-tools.yml` — pings new tool + comparison URLs + listing pages
+- `update-comparisons.yml` — pings updated comparison URLs + `/compare` listing
+
+**Run manually:**
+
+```bash
+node scripts/indexnow.mjs https://apprival.net/blog/my-new-post https://apprival.net/tools/new-tool
+```
+
+No API key or secret is needed — the IndexNow key is public by design (it's hosted on the domain for verification).
+
+---
+
 ## Setting Up the GitHub Secret
 
 Both workflows share the same secret — you only need to set it once.
@@ -77,9 +101,9 @@ To run either workflow manually:
 
 ## Automated Schedule
 
-| Time | What happens | Coverage |
-|------|-------------|----------|
-| Every day 8am UTC | New blog post generated and published | SaaS & AI topics (alternating) |
-| Every Monday 6am UTC | All comparisons refreshed with updated content | SaaS & AI comparisons |
-| Every Wednesday 7am UTC | 3 new tools discovered + comparisons generated | SaaS & AI tools (alternating) |
-| Every push to GitHub | Lovable auto-deploys the changes live | — |
+| Time | What happens | Coverage | IndexNow |
+|------|-------------|----------|----------|
+| Every day 8am UTC | New blog post generated and published | SaaS & AI topics (alternating) | ✓ Pings new post URL |
+| Every Monday 6am UTC | All comparisons refreshed with updated content | SaaS & AI comparisons | ✓ Pings updated comparisons |
+| Every Wednesday 7am UTC | 3 new tools discovered + comparisons generated | SaaS & AI tools (alternating) | ✓ Pings new tool + comparison URLs |
+| Every push to GitHub | Lovable auto-deploys the changes live | — | — |
