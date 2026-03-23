@@ -16,9 +16,14 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
       - name: Discover and add new tools
+        id: discover
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: node scripts/discover-tools.mjs
+        run: |
+          node scripts/discover-tools.mjs | tee /tmp/discover-output.log
+          TOOL_SLUGS=$(grep -oP '(?<=Adding tool: )\S+' /tmp/discover-output.log | sed 's/^/https:\/\/apprival.net\/tools\//' | tr '\n' ' ')
+          COMP_SLUGS=$(grep -oP '(?<=→ )\S+(?= ✓)' /tmp/discover-output.log | sed 's/^/https:\/\/apprival.net\/compare\//' | tr '\n' ' ')
+          echo "urls=$TOOL_SLUGS $COMP_SLUGS" >> "$GITHUB_OUTPUT"
       - name: Commit new tools and comparisons
         run: |
           git config user.name "github-actions[bot]"
@@ -26,3 +31,10 @@ jobs:
           git add src/data/tools.ts src/data/comparisons.ts public/sitemap.xml
           git diff --staged --quiet || git commit -m "feat: auto-discover new tools $(date +'%Y-%m-%d')"
           git push
+      - name: Ping IndexNow
+        if: success()
+        run: |
+          node scripts/indexnow.mjs \
+            "https://apprival.net/tools" \
+            "https://apprival.net/compare" \
+            ${{ steps.discover.outputs.urls }}
