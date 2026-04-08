@@ -3,7 +3,8 @@
 // Usage: node scripts/indexnow.mjs <url1> <url2> ...
 // Notifies Bing, Yandex, and other IndexNow-compatible search engines of new/updated URLs.
 
-const API_KEY = 'b64ae64acba449c1';
+const API_KEY = process.env.INDEXNOW_KEY;
+if (!API_KEY) throw new Error('INDEXNOW_KEY environment secret is not set — add it to GitHub Actions secrets');
 const HOST = 'apprival.net';
 const ENDPOINT = 'https://api.indexnow.org/indexnow';
 

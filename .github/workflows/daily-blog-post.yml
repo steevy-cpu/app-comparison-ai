@@ -32,6 +32,8 @@ jobs:
           git push
       - name: Ping IndexNow
         if: success()
+        env:
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
         run: |
           node scripts/indexnow.mjs \
             "https://apprival.net/blog" \
