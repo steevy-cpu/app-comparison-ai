@@ -638,6 +638,32 @@ export const tools: Tool[] = [
     cons: ["Requires participant consent in some jurisdictions","Storage limits on free tier"],
     bestFor: "Sales teams, customer success managers, and enterprises that rely on video calls and need to capture actionable insights without manual note-taking.",
   },
+  {
+    slug: "omnifocus-3",
+    name: "OmniFocus 3",
+    category: "Productivity",
+    description: "OmniFocus is a powerful task management and GTD (Getting Things Done) application designed for Mac, iPad, and iPhone users who need advanced organizing capabilities. It helps professionals and knowledge workers capture, organize, and execute on their tasks with sophisticated filtering, forecasting, and automation features.",
+    website: "omnigroup.com",
+    pricing: "Free trial available; Standard: $39.99 one-time (Mac), $34.99 (iPad), $27.99 (iPhone); Pro: $99.99 one-time (Mac), $84.99 (iPad), $79.99 (iPhone); subscription options also available at $9.99/month for Pro",
+    rating: 4.7,
+    features: ["GTD methodology support","Advanced task filtering and perspectives","Forecasting and defer dates","Automation with scripts and plugins","Calendar integration","Syncing across Apple devices"],
+    pros: ["Extremely powerful for complex task hierarchies","Excellent for GTD practitioners","Deep customization options","Seamless Apple ecosystem integration"],
+    cons: ["Apple-only platform","Steep learning curve for new users","Premium pricing compared to alternatives"],
+    bestFor: "Mac and Apple device users who practice Getting Things Done methodology and need sophisticated task management with deep customization and automation capabilities.",
+  },
+  {
+    slug: "aircall",
+    name: "Aircall",
+    category: "Communication",
+    description: "Aircall is a cloud-based phone system and call center platform that enables teams to manage calls, SMS, and customer communications directly from their browser or mobile app. It's designed for sales teams, customer support departments, and distributed teams that need unified communication without traditional phone infrastructure.",
+    website: "aircall.io",
+    pricing: "Free plan with basic features; Growth: €30/user/month; Scale: €50/user/month; Premier: €100/user/month; custom enterprise pricing available",
+    rating: 4.6,
+    features: ["Cloud-based phone system","Call recording and transcription","IVR and call routing","CRM integrations","SMS capabilities","Analytics and reporting"],
+    pros: ["Easy setup without hardware requirements","Excellent CRM integrations","Strong call quality and reliability","Built-in call recording and analytics"],
+    cons: ["Higher per-user costs for larger teams","Limited customization compared to enterprise PBX systems","International calling can be expensive"],
+    bestFor: "Sales teams, customer support departments, and remote-first companies that need a modern cloud phone system with CRM integration and don't want to manage physical infrastructure.",
+  },
 ];
 
 export function getToolBySlug(slug: string): Tool | undefined {
