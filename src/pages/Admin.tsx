@@ -125,21 +125,23 @@ const Admin = () => {
   }
 
   async function saveRow(row: AffiliateRow) {
-    if (!row.affiliate_url.trim()) return;
+    if (!row.affiliate_url.trim() || !token) return;
     setSavingSlug(row.tool_slug);
-    const { error } = await supabase.from("affiliate_urls").upsert(
-      {
+    const { data, error } = await supabase.functions.invoke("admin-affiliate-urls", {
+      body: {
+        action: "upsert",
         tool_slug: row.tool_slug,
         tool_name: row.tool_name,
         affiliate_url: row.affiliate_url.trim(),
       },
-      { onConflict: "tool_slug" }
-    );
+      headers: { Authorization: `Bearer ${token}` },
+    });
     setSavingSlug(null);
-    if (error) {
+    const errMsg = error?.message || (data && !data.success ? data.error : null);
+    if (errMsg) {
       setErrorSlug(row.tool_slug);
       setTimeout(() => setErrorSlug(null), 2000);
-      toast({ title: "Error saving", description: error.message, variant: "destructive" });
+      toast({ title: "Error saving", description: errMsg, variant: "destructive" });
     } else {
       setSavedSlug(row.tool_slug);
       setRows((prev) =>
@@ -155,18 +157,23 @@ const Admin = () => {
       toast({ title: "Nothing to save", description: "No changes detected." });
       return;
     }
+    if (!token) return;
     setBulkSaving(true);
-    const { error } = await supabase.from("affiliate_urls").upsert(
-      toSave.map((r) => ({
-        tool_slug: r.tool_slug,
-        tool_name: r.tool_name,
-        affiliate_url: r.affiliate_url.trim(),
-      })),
-      { onConflict: "tool_slug" }
-    );
+    const { data, error } = await supabase.functions.invoke("admin-affiliate-urls", {
+      body: {
+        action: "bulk_upsert",
+        rows: toSave.map((r) => ({
+          tool_slug: r.tool_slug,
+          tool_name: r.tool_name,
+          affiliate_url: r.affiliate_url.trim(),
+        })),
+      },
+      headers: { Authorization: `Bearer ${token}` },
+    });
     setBulkSaving(false);
-    if (error) {
-      toast({ title: "Bulk save failed", description: error.message, variant: "destructive" });
+    const errMsg = error?.message || (data && !data.success ? data.error : null);
+    if (errMsg) {
+      toast({ title: "Bulk save failed", description: errMsg, variant: "destructive" });
     } else {
       setRows((prev) => prev.map((r) => (toSave.find((s) => s.tool_slug === r.tool_slug) ? { ...r, source: "supabase", dirty: false } : r)));
       toast({ title: "All changes saved", description: `${toSave.length} URLs updated.` });
@@ -174,8 +181,9 @@ const Admin = () => {
   }
 
   function logout() {
+    localStorage.removeItem("admin_token");
     localStorage.removeItem("admin_auth");
-    setAuthed(false);
+    setToken(null);
   }
 
   const filtered = useMemo(
@@ -189,7 +197,7 @@ const Admin = () => {
     return { total, configured, missing: total - configured };
   }, [rows]);
 
-  if (!authed) return <AdminLogin onAuth={() => setAuthed(true)} />;
+  if (!authed) return <AdminLogin onAuth={(t) => setToken(t)} />;
 
   return (
     <div className="min-h-screen bg-background">
