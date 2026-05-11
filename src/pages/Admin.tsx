@@ -17,21 +17,21 @@ interface AffiliateRow {
   dirty: boolean;
 }
 
-// Set VITE_ADMIN_PASSWORD in Lovable project settings → Environment Variables
-const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
-if (!ADMIN_PASSWORD) {
-  console.error('VITE_ADMIN_PASSWORD environment variable is not set');
-}
-
-function AdminLogin({ onAuth }: { onAuth: () => void }) {
+function AdminLogin({ onAuth }: { onAuth: (token: string) => void }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === ADMIN_PASSWORD) {
-      localStorage.setItem("admin_auth", "true");
-      onAuth();
+    setLoading(true);
+    const { data, error: fnError } = await supabase.functions.invoke("admin-affiliate-urls", {
+      body: { action: "verify", password },
+    });
+    setLoading(false);
+    if (!fnError && data?.success && data?.token) {
+      localStorage.setItem("admin_token", data.token);
+      onAuth(data.token);
     } else {
       setError(true);
       setTimeout(() => setError(false), 600);
