@@ -1,49 +1,39 @@
+## Goal
 
+Make `/admin` login work reliably in both preview and production (Vercel) by checking the password against a backend secret (`ADMIN_TOKEN`) — no rebuild required when the password changes, and the password is never shipped in the frontend bundle.
 
-# Plan: Add IndexNow to AppRival
+## Why the current setup fails
 
-## What is IndexNow?
-IndexNow is a protocol that lets you instantly notify Bing (and Yandex, Naver, etc.) when pages are added or updated on your site. Instead of waiting for crawlers to discover changes, you push URLs directly. This speeds up indexing significantly.
+- `VITE_ADMIN_PASSWORD` is inlined at **build time**. Setting it in Lovable doesn't take effect until the preview rebuilds; on Vercel it must also be added there and the site redeployed.
+- It's also visible in the JS bundle to anyone who downloads it.
 
-## Implementation
+## Changes
 
-### 1. Generate and host the API key file
-- Create `public/<key>.txt` containing the key string itself. IndexNow requires a verification file at your domain root.
-- Use a standard UUID-style key, e.g. `a1b2c3d4e5f6g7h8` (will generate a proper one).
-- File: `public/a1b2c3d4e5f6g7h8.txt` containing just the key.
+### 1. Extend the existing edge function `admin-affiliate-urls`
+Add a new `action: "verify"` branch that:
+- Reads `password` from the request body
+- Compares it (constant-time) against `Deno.env.get("ADMIN_TOKEN")`
+- Returns `{ success: true, token: ADMIN_TOKEN }` on match, `401` otherwise
 
-### 2. Create `scripts/indexnow.mjs`
-A reusable utility script that submits URLs to the IndexNow API:
-- Reads the API key from an env var `INDEXNOW_API_KEY` or hardcoded constant (since the key is public anyway — it's hosted at the domain root).
-- Accepts a list of URLs as arguments or reads changed files from git diff to determine which URLs to submit.
-- Calls `https://api.indexnow.org/indexnow` with the key, host, and URL list.
-- Logs success/failure for each batch.
+Keep the existing `upsert` / `delete` actions unchanged — they continue to require the `Bearer` token.
 
-### 3. Add IndexNow ping step to all 3 workflow files
-After each commit+push step, add a new step that determines which URLs changed and pings IndexNow:
+### 2. Update `src/pages/Admin.tsx`
+- `AdminLogin`: on submit, call the edge function with `{ action: "verify", password }`. On success, store the returned token in `localStorage` as `admin_token` (replacing the boolean `admin_auth` flag).
+- Authenticated state derived from presence of `admin_token`.
+- `saveRow` / `saveAll`: switch from direct `supabase.from("affiliate_urls").upsert(...)` to `supabase.functions.invoke("admin-affiliate-urls", { body: { action: "upsert", ... }, headers: { Authorization: \`Bearer ${token}\` } })` so writes go through the authorized edge function. Reads (loading existing rows) stay as direct `select` since the table is public-read.
+- Logout clears `admin_token`.
+- Remove all references to `VITE_ADMIN_PASSWORD`.
 
-**daily-blog-post.yml** — submit the new blog post URL + `/blog` listing page.
+### 3. Tighten the `affiliate_urls` RLS (technical detail)
+Currently writes likely allowed via anon — verify and, if needed, restrict INSERT/UPDATE/DELETE to service role only (the edge function uses the service role key, so admin writes still work). Public SELECT stays.
 
-**discover-tools.yml** — submit new tool URLs + new comparison URLs + `/tools` and `/compare` listing pages.
+## Result
 
-**update-comparisons.yml** — submit all comparison URLs that were updated + `/compare` listing page.
+- You set/change the admin password by updating the **`ADMIN_TOKEN`** secret in Lovable Cloud → Secrets. Takes effect immediately, no rebuild, works the same on Vercel.
+- Password never appears in the frontend bundle.
+- `VITE_ADMIN_PASSWORD` env var becomes unused and can be deleted.
 
-Each workflow step will:
-1. Parse the script output or git diff to find new/changed slugs
-2. Call `node scripts/indexnow.mjs <url1> <url2> ...`
+## What you'll need to do after I implement this
 
-### 4. Update `scripts/README.md`
-Add a section explaining IndexNow integration and the API key setup.
-
-## Files to create/modify
-| File | Action |
-|------|--------|
-| `public/b64ae64acba449c1.txt` | Create — IndexNow verification key file |
-| `scripts/indexnow.mjs` | Create — IndexNow URL submission utility |
-| `.github/workflows/daily-blog-post.yml` | Add IndexNow ping step |
-| `.github/workflows/discover-tools.yml` | Add IndexNow ping step |
-| `.github/workflows/update-comparisons.yml` | Add IndexNow ping step |
-| `scripts/README.md` | Add IndexNow documentation section |
-
-No existing pages, components, data files, or scripts are modified.
-
+1. Confirm `ADMIN_TOKEN` is set in Cloud → Secrets (it already exists per earlier setup). If you forgot the value, just update it to a new password you'll remember.
+2. Log into `/admin` with that value.
