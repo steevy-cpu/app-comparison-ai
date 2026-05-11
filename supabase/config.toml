@@ -1,1 +1,4 @@
 project_id = "ebdfvdsugqxxpfgzfjuh"
+
+[functions.admin-affiliate-urls]
+verify_jwt = false
