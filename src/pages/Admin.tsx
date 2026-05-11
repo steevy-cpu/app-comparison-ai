@@ -67,7 +67,8 @@ function AdminLogin({ onAuth }: { onAuth: (token: string) => void }) {
 }
 
 const Admin = () => {
-  const [authed, setAuthed] = useState(() => localStorage.getItem("admin_auth") === "true");
+  const [token, setToken] = useState<string | null>(() => localStorage.getItem("admin_token"));
+  const authed = !!token;
   const [rows, setRows] = useState<AffiliateRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
