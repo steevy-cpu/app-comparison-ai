@@ -781,6 +781,32 @@ export const tools: Tool[] = [
     cons: ["Limited customization compared to Salesforce","Smaller app ecosystem than established competitors"],
     bestFor: "Small to mid-size sales teams and solopreneurs who need a straightforward, mobile-friendly CRM with AI insights without the complexity of enterprise platforms.",
   },
+  {
+    slug: "hubspot-service-hub",
+    name: "HubSpot Service Hub",
+    category: "CRM",
+    description: "A customer service and support platform that helps teams manage customer interactions across multiple channels including email, chat, and social media. Companies use it to deliver personalized support and build customer loyalty.",
+    website: "hubspot.com/products/service",
+    pricing: "Free plan available; Starter at $50/month, Professional at $120/month, Enterprise at $360+/month (billed annually)",
+    rating: 4.6,
+    features: ["Multi-channel ticket management","AI-powered chatbots and automation","Customer knowledge base builder","Team collaboration and assignment tools","Customer feedback and surveys","Reporting and analytics dashboard"],
+    pros: ["Strong free plan with robust features","Excellent integration with HubSpot CRM","User-friendly interface requires minimal training"],
+    cons: ["Can become expensive at enterprise scale","Limited customization compared to some competitors","Reporting could be more granular"],
+    bestFor: "Mid-market and growing companies that want an all-in-one CRM with integrated customer service capabilities and native AI features.",
+  },
+  {
+    slug: "pika-ai",
+    name: "Pika AI",
+    category: "AI Video & Audio",
+    description: "An AI video generation tool that creates high-quality videos from text prompts and images with realistic physics and motion. Content creators, marketers, and studios use it to produce videos faster and reduce production costs.",
+    website: "pika.art",
+    pricing: "Free plan with limited generations; Pro plan at $10/month for 250 monthly credits; Plus plan at $30/month for 900 credits",
+    rating: 4.5,
+    features: ["Text-to-video generation","Image-to-video transformation","Multi-shot video editing","Realistic motion and physics simulation","Customizable video lengths","API access for Pro users"],
+    pros: ["Produces high-quality videos with realistic motion","Intuitive interface for non-technical users","Affordable pricing with generous free tier"],
+    cons: ["Generation speed can be slower during peak usage","Limited control over specific character movements","Smaller library of styles compared to some competitors"],
+    bestFor: "Content creators, marketing teams, and small production studios looking to generate high-quality videos quickly without expensive equipment or long production timelines.",
+  },
 ];
 
 export function getToolBySlug(slug: string): Tool | undefined {
