@@ -807,6 +807,32 @@ export const tools: Tool[] = [
     cons: ["Generation speed can be slower during peak usage","Limited control over specific character movements","Smaller library of styles compared to some competitors"],
     bestFor: "Content creators, marketing teams, and small production studios looking to generate high-quality videos quickly without expensive equipment or long production timelines.",
   },
+  {
+    slug: "rippling",
+    name: "Rippling",
+    category: "Productivity",
+    description: "Rippling is an all-in-one workforce management platform that unifies HR, IT, and Finance operations in a single system. It's used by mid-market and enterprise companies to automate employee onboarding, device management, payroll, and benefits administration.",
+    website: "rippling.com",
+    pricing: "Custom pricing based on company size and modules; typically $8-15 per employee per month; free trial available",
+    rating: 4.6,
+    features: ["Employee onboarding automation","Device management and provisioning","Payroll and benefits administration","Single sign-on (SSO) and identity management","Expense management","Time and attendance tracking"],
+    pros: ["Eliminates need for multiple vendor integrations","Exceptional onboarding and offboarding automation","Strong mobile app for employees"],
+    cons: ["Steep learning curve for complex configurations","Higher cost than standalone HR tools","Limited customization in some workflows"],
+    bestFor: "Growing companies with 50+ employees that want to consolidate HR, IT, and finance tools into one unified platform to reduce administrative overhead.",
+  },
+  {
+    slug: "affinity-crm",
+    name: "Affinity",
+    category: "CRM",
+    description: "Affinity is a relationship intelligence CRM designed specifically for professionals in venture capital, private equity, and professional services. It combines CRM functionality with AI-powered relationship mapping and deal tracking.",
+    website: "affinity.co",
+    pricing: "Starter plan $0/month (limited); Plus plan $99/month; Pro plan $999/month; custom enterprise pricing",
+    rating: 4.5,
+    features: ["Relationship intelligence and mapping","Deal and opportunity tracking","Email integration and tracking","Organization and person profiles","Entity resolution and data enrichment","Portfolio tracking for investors"],
+    pros: ["Exceptional data enrichment and relationship intelligence","Built specifically for investment professionals","Seamless email integration with automatic logging"],
+    cons: ["Steep pricing for smaller teams","Longer onboarding curve","Limited customization compared to enterprise CRMs"],
+    bestFor: "Venture capital firms, private equity professionals, and business development teams who need advanced relationship intelligence and deal tracking with automatic data enrichment.",
+  },
 ];
 
 export function getToolBySlug(slug: string): Tool | undefined {
