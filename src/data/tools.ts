@@ -872,6 +872,32 @@ export const tools: Tool[] = [
     cons: ["Performance can vary based on complex conversation requirements","Limited international language support compared to some competitors"],
     bestFor: "Customer service teams, sales departments, and small-to-medium businesses looking to automate repetitive phone interactions and qualify leads without hiring additional staff.",
   },
+  {
+    slug: "smartsheet",
+    name: "Smartsheet",
+    category: "Project Management",
+    description: "Smartsheet is a cloud-based work execution platform that combines project management, collaboration, and automation capabilities for enterprises. It's widely used by large organizations to manage complex projects, portfolios, and workflows across teams and departments.",
+    website: "smartsheet.com",
+    pricing: "Free plan available; Pro starts at $7/user/month, Business at $14/user/month, Enterprise custom pricing (annual commitment required for paid plans)",
+    rating: 4.5,
+    features: ["Gantt charts and timeline views","Automated workflows and approvals","Real-time collaboration","Portfolio management","Resource allocation tracking","API and integration capabilities"],
+    pros: ["Highly flexible for complex enterprise projects","Strong automation and workflow capabilities","Excellent for portfolio-level visibility","Robust API for custom integrations"],
+    cons: ["Steeper learning curve than simpler tools","Can be expensive for large teams"],
+    bestFor: "Enterprise teams and organizations managing multiple complex projects simultaneously who need advanced portfolio visibility and automation capabilities.",
+  },
+  {
+    slug: "intercom",
+    name: "Intercom",
+    category: "Communication",
+    description: "Intercom is a customer communication platform that combines live chat, chatbots, email, and in-app messaging to help businesses engage and support customers. It's used by product teams and customer support departments to provide personalized customer experiences at scale.",
+    website: "intercom.com",
+    pricing: "Free plan available; Starter at $39/month, Growth at $99/month, Pro at $449/month, Premium custom pricing (per seat costs apply)",
+    rating: 4.4,
+    features: ["Live chat and real-time messaging","AI-powered chatbots","Ticketing and help desk","In-app messaging and targeted campaigns","Customer data platform","Analytics and reporting"],
+    pros: ["Excellent customer experience with AI automation","Strong integration ecosystem","Unified inbox for all customer communications","Powerful segmentation and targeting"],
+    cons: ["Pricing becomes expensive with team growth","Setup and customization can be complex"],
+    bestFor: "Product-focused companies and SaaS businesses that need to provide proactive customer support and engagement through multiple communication channels.",
+  },
 ];
 
 export function getToolBySlug(slug: string): Tool | undefined {
