@@ -898,6 +898,32 @@ export const tools: Tool[] = [
     cons: ["Pricing becomes expensive with team growth","Setup and customization can be complex"],
     bestFor: "Product-focused companies and SaaS businesses that need to provide proactive customer support and engagement through multiple communication channels.",
   },
+  {
+    slug: "gong",
+    name: "Gong",
+    category: "CRM",
+    description: "An AI-powered revenue intelligence platform that records, transcribes, and analyzes customer interactions (calls, meetings, emails) to provide insights on sales performance and customer behavior. Used by sales teams and revenue leaders to improve deal outcomes and team coaching.",
+    website: "gong.io",
+    pricing: "Custom pricing starting around $200-500/month for teams; no free plan available. Enterprise plans available with advanced features and dedicated support.",
+    rating: 4.6,
+    features: ["Call and meeting recording and transcription","Conversation intelligence and analysis","Deal coaching and insights","Sales performance analytics","Competitor mention tracking","Integration with major CRMs and communication tools"],
+    pros: ["Highly accurate transcription and analysis","Actionable coaching insights for sales teams","Strong ROI tracking capabilities","Excellent integrations with Salesforce and HubSpot"],
+    cons: ["Expensive compared to basic CRM tools","Steep learning curve for new users","Requires explicit call recording consent which can limit data"],
+    bestFor: "Mid-market to enterprise sales teams and revenue leaders who need deep insights into customer conversations and want to optimize deal outcomes through data-driven coaching.",
+  },
+  {
+    slug: "runway-gen-3",
+    name: "Runway Gen-3",
+    category: "AI Video & Audio",
+    description: "An advanced AI video generation and editing platform that creates, transforms, and edits videos from text, images, and existing footage using generative AI. Used by content creators, marketers, and video producers who want to automate video production workflows.",
+    website: "runway.com",
+    pricing: "Free tier with limited exports; paid plans start at $12/month (Standard) up to $76/month (Pro) with more credits and features; Custom enterprise pricing available.",
+    rating: 4.7,
+    features: ["Text-to-video generation","Image-to-video transformation","AI video editing and enhancement","Motion tracking and object removal","Audio separation and enhancement","Collaborative workspace for teams"],
+    pros: ["Fastest generation speeds in the market","High-quality video output","Intuitive interface for non-technical users","Extensive integration with design tools"],
+    cons: ["Can be expensive for high-volume users","Generated videos sometimes require fine-tuning","Learning curve for advanced features"],
+    bestFor: "Content creators, marketing teams, and video producers who need to generate high-quality videos quickly at scale without extensive video editing expertise.",
+  },
 ];
 
 export function getToolBySlug(slug: string): Tool | undefined {
